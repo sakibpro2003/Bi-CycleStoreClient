@@ -8,7 +8,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 // import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./layouts/ProtectedRoute";
 import Bicycles from "./pages/BiCycles";
 
 const router = createBrowserRouter([

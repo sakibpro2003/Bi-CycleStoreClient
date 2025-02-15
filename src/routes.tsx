@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
 // import DashboardLayout from "./layouts/DashboardLayout";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
@@ -24,9 +23,10 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-        <Route path="/bicycles" element={<MainLayout><Bicycles /></MainLayout>} />
-        <Route path="/about" element={<MainLayout><About /></MainLayout>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/bicycles" element={<Bicycles />} />
+        <Route path="/about" element={<About />} />
+        {/* <Route path="/about" element={<MainLayout><About /></MainLayout>} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
