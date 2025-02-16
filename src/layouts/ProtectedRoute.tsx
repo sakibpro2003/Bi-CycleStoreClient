@@ -24,14 +24,25 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const token = useAppSelector(useCurrentToken)
+  console.log(token, "token from protected")
+
+  if (token) {
+    return <Navigate to="/dashboard" replace />;
+  }
   if(!token){
     <Navigate to={'/login'} replace/>
   }
-  const isAuthenticated = localStorage.getItem("token"); // Replace with your actual auth check
+  // const isAuthenticated = localStorage.getItem("token"); // Replace with your actual auth check
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  
+  // if(!token){
+  //   <Navigate to={'/login'} replace/>
+  // }
+  // const isAuthenticated = localStorage.getItem("token"); // Replace with your actual auth check
+
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return <>{children}</>;
 };

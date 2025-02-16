@@ -1,14 +1,12 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/features/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-import { Navigate, useNavigate } from "react-router-dom";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 const Login = () => {
-  // const notify = () => toast("Login Successful");
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm({
@@ -17,14 +15,9 @@ const Login = () => {
       password: "1234",
     },
   });
-  const [login, { data, error }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
-  //!my creativity..................
-  // type TUserData = {
-  //   email: string;
-  //   password: string;
-  // };
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: FieldValues) => {
     const userInfo = {
       email: data.email,
       password: data.password,

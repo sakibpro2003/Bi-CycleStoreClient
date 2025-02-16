@@ -1,12 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { logOut } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/features/hooks";
-import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     dispatch(logOut());
-    
+    navigate("/login");
   };
   return (
     <div>

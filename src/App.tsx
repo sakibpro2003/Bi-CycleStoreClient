@@ -10,6 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute";
 import Bicycles from "./pages/BiCycles";
+import Products from "./pages/dashboard/Products";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
+      { path : "products", element:<Products></Products>},
     ],
   },
   { path: "/login", element: <Login /> },
