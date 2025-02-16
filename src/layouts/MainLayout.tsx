@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
   return (
     <div>
-      <nav>Navbar</nav>
+      <Navbar></Navbar>
+      {/* <nav>Navbar</nav> */}
       <Outlet /> {/* This is where child pages (Home, Bicycles, About) will render */}
       <footer>Footer</footer>
     </div>

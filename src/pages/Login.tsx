@@ -3,8 +3,13 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/features/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
+  // const notify = () => toast("Login Successful");
+
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -29,6 +34,18 @@ const Login = () => {
     console.log(user);
     console.log(res);
     dispatch(setUser({ user: user, token: res.data.token }));
+    toast.success("Login successful", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+    navigate("/");
   };
 
   return (
