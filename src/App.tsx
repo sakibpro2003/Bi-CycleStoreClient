@@ -11,6 +11,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute";
 import Bicycles from "./pages/BiCycles";
 import Products from "./pages/dashboard/Products";
+import BikeDetails from "./pages/BikeDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,9 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
-      { path : "products", element:<Products></Products>},
+      { path: "products", element: <Products></Products> },
+      { path: "products/:id", element: <BikeDetails></BikeDetails> }
+
     ],
   },
   { path: "/login", element: <Login /> },

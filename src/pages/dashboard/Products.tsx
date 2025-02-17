@@ -6,7 +6,7 @@ const Products = () => {
   const products = data.currentData?.data;
   
   return (
-    <div className="bg-red-500 max-w-11/12 mx-auto flex flex-col items-center">
+    <div className="max-w-11/12 mx-auto flex flex-col items-center">
       <h2 className="text-white text-2xl font-bold my-4">Bi-Cycles</h2>
       <div className="grid grid-cols-3 gap-10">
         {products?.map((product) => (

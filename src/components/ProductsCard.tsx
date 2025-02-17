@@ -1,30 +1,15 @@
+import { useNavigate } from "react-router-dom";
 
-// brand
-
-// "SpeedX"
-// description
-// : 
-// "A lightweight road bike with a carbon fiber frame and Shimano gears."
-// inStock
-// : 
-// true
-// name
-// : 
-// "SpeedX Roadster"
-// price
-// : 
-// 1200
-// quantity
-// : 
-// 10
-// type
-// : 
-// "Road"
-// _id
-// : 
-// "67b04c73b4831f5bd3da23ab"
 const ProductsCard = ({ product }) => {
-    const {name,brand,price,inStock,type,description,} = product
+  const navigate = useNavigate()
+  const {name,brand,price,inStock,type,description,_id} = product
+  const handleViewDetail = (id)=>{
+
+  navigate(`/products/${id}`);
+
+
+    console.log(name)
+  }
   return (
     <div className="card bg-base-100 w-96 shadow-xl">
       <figure className="px-10 pt-10">
@@ -39,7 +24,7 @@ const ProductsCard = ({ product }) => {
         <p>{description}</p>
         <p>{price} Taka</p>
         <div className="card-actions">
-          <button className="btn btn-primary">View Details</button>
+          <button onClick={()=>handleViewDetail(_id)} className="btn btn-primary">View Details</button>
         </div>
       </div>
     </div>
