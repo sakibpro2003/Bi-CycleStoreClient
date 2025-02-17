@@ -1,8 +1,12 @@
+import Banner from "../components/Banner";
+import FeaturedSection from "../components/FeaturedSection";
+
 <link href="/src/App.css" rel="stylesheet"></link>
 const Home = () => {
     return (
         <div>
-            <h2 className="bg-red-600">home page</h2>
+            <Banner></Banner>
+            <FeaturedSection></FeaturedSection>
             <button className="btn">Button</button>
         </div>
     );

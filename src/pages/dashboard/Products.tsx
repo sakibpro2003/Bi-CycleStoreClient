@@ -3,15 +3,14 @@ import { useGetAllproductsQuery } from "../../redux/features/products/products";
 
 const Products = () => {
   const data = useGetAllproductsQuery(undefined);
-  // console.log(data.currentData?.data);
   const products = data.currentData?.data;
-  console.log(products);
+  
   return (
-    <div>
-      <h2>Bi-Cycles</h2>
-      <div className="grid grid-cols-3">
+    <div className="bg-red-500 max-w-11/12 mx-auto flex flex-col items-center">
+      <h2 className="text-white text-2xl font-bold my-4">Bi-Cycles</h2>
+      <div className="grid grid-cols-3 gap-10">
         {products?.map((product) => (
-          <ProductsCard product={product}></ProductsCard>
+          <ProductsCard key={product.id} product={product} />
         ))}
       </div>
     </div>
