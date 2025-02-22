@@ -3,15 +3,17 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/dashboard/Dashboard";
+// import Dashboard from "./pages/dashboard/Dashboard";
 // import UserDashboard from "./pages/dashboard/UserDashboard";
 // import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute";
-import Bicycles from "./pages/BiCycles";
+// import Bicycles from "./pages/BiCycles";
 import Products from "./pages/dashboard/Products";
 import BikeDetails from "./pages/BikeDetails";
+import Checkout from "./pages/Checkout";
+import Bicycles from "./pages/Bicycles";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,8 @@ const router = createBrowserRouter([
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
       { path: "products", element: <Products></Products> },
-      { path: "products/:id", element: <BikeDetails></BikeDetails> }
+      { path: "products/:id", element: <BikeDetails></BikeDetails> },
+      { path: "products/checkout/:id", element: <Checkout></Checkout> }
 
     ],
   },

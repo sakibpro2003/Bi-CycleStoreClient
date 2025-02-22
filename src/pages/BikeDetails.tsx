@@ -1,9 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleProductsQuery } from "../redux/features/products/products";
 
 const BikeDetails = () => {
   const { id } = useParams();
+  const navigate=useNavigate()
   const { data, isLoading, error } = useGetSingleProductsQuery(id);
+
+  const handleCheckout = (id)=>{
+    console.log(id)
+    navigate(`/products/checkout/${id}`)
+  }
 
   // Ensure data exists before destructuring, fallback to an empty object
   const {
@@ -85,7 +91,7 @@ const BikeDetails = () => {
               </div>
 
               {/* Call-to-action Button */}
-              <button className="mt-6 w-full btn text-lg">Buy Now</button>
+              <button onClick={()=>handleCheckout(id)} className="mt-6 w-full btn text-lg">Buy Now</button>
             </div>
           </div>
         </div>

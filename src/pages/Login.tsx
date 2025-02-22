@@ -9,7 +9,7 @@ import { Bounce, toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "sakib@gmail.com",
@@ -28,7 +28,7 @@ const Login = () => {
 
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.token);
-      
+
       dispatch(setUser({ user: user, token: res.data.token }));
 
       toast.success("Login successful", {
@@ -46,7 +46,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       let errorMessage = "Something went wrong!";
-      
+
       if ((err as { data?: { message?: string } }).data?.message) {
         errorMessage = (err as { data: { message: string } }).data.message;
       }
@@ -74,7 +74,10 @@ const Login = () => {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-900"
+                >
                   Email address
                 </label>
                 <div className="mt-2">
@@ -91,11 +94,17 @@ const Login = () => {
 
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-900"
+                  >
                     Password
                   </label>
                   <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    <a
+                      href="#"
+                      className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    >
                       Forgot password?
                     </a>
                   </div>
@@ -123,8 +132,11 @@ const Login = () => {
             </div>
 
             <p className="mt-10 text-center text-sm text-gray-500">
-              Don’t have an account?{" "}
-              <a href="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">
+              Don't have an account?{" "}
+              <a
+                href="/register"
+                className="font-semibold text-indigo-600 hover:text-indigo-500"
+              >
                 Register
               </a>
             </p>
