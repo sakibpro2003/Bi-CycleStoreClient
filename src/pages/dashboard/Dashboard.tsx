@@ -10,11 +10,13 @@ const Dashboard = () => {
   useEffect(() => {
     if (!user) {
       navigate("/login");
-    } else if (user.role === "admin") {
-      navigate("/dashboard/admin");
-    } else {
-      navigate("/dashboard/user");
     }
+    navigate("/dashboard/admin")
+    //  else if (user.role === "admin") {
+    //   navigate("/dashboard/admin");
+    // } else {
+    //   navigate("/dashboard/user");
+    // }
   }, [user, navigate]);
 
   return <div>Redirecting...</div>;

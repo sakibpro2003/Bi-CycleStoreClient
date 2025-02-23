@@ -1,47 +1,57 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetSingleProductsQuery } from "../redux/features/products/products";
+import { useMakeOrderMutation } from "../redux/features/orders/ordersApi";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const { id } = useParams();
   const { data } = useGetSingleProductsQuery(id);
+  const [makeOrder] = useMakeOrderMutation();
 
   // Extract product details
   const name = data?.data?.name;
-  const productPrice = data?.data?.price || 0; // Get product price, default 0 if not found
+  const productPrice = data?.data?.price || 0; // Default price if not found
 
   // Initialize form data state
   const [formData, setFormData] = useState({
     products: id || "",
-    totalPrice: 0, // Start with 0, will be calculated
+    totalPrice: 0,
     quantity: 1,
     paymentMethod: "bKash",
     address: "",
     phone: "",
   });
 
-  // Update totalPrice dynamically when quantity or productPrice changes
+  // Separate totalPrice state
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  // Update totalPrice dynamically
   useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      totalPrice: prevData.quantity * productPrice,
-    }));
+    setTotalPrice(formData.quantity * productPrice);
   }, [formData.quantity, productPrice]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
     setFormData((prevData) => ({
       ...prevData,
       [name]: name === "quantity" ? Number(value) : value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Order Data:", formData);
+
+    // console.log(token, "token");
+    try {
+      const response = await makeOrder({ ...formData, totalPrice }).unwrap();
+      toast.success("Order placed successfully")
+      // console.log("Order placed successfully:", response);
+    } catch (err) {
+      console.error("Error placing order:", err);
+    }
   };
 
   return (
@@ -55,7 +65,6 @@ const Checkout = () => {
         <span className="label-text">Product Name</span>
         <input
           type="text"
-          name="product"
           defaultValue={name}
           className="input input-bordered"
           readOnly
@@ -79,8 +88,7 @@ const Checkout = () => {
         <span className="label-text">Total Price</span>
         <input
           type="number"
-          name="totalPrice"
-          value={formData.totalPrice}
+          value={totalPrice}
           className="input input-bordered"
           readOnly
         />

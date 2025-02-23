@@ -51,7 +51,7 @@ const Login = () => {
         errorMessage = (err as { data: { message: string } }).data.message;
       }
 
-      console.log(errorMessage);
+      // console.log(errorMessage);
       toast.error(errorMessage, { position: "top-right" });
     }
   };
