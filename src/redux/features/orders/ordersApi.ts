@@ -8,7 +8,7 @@ const ordersApi = baseApi.injectEndpoints({
         const storedAuth = localStorage.getItem("persist:auth");
 
         if (!storedAuth) {
-          console.error("❌ No auth data found!");
+          console.error("No auth data found!");
           return;
         }
 
@@ -26,7 +26,31 @@ const ordersApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getOrders: builder.query({
+      query: () => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: "/order",
+          method: "GET",
+          // body: orderData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useMakeOrderMutation } = ordersApi;
+export const { useMakeOrderMutation,useGetOrdersQuery } = ordersApi;
