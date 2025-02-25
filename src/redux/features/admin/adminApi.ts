@@ -50,7 +50,85 @@ const adminApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllOrders: builder.query({
+      query: () => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: "/order/get-all-orders",
+          method: "GET",
+          // body: orderData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //TODO: complete it.............................................................................
+
+
+
+
+
+
+
+
+
+
+    
+    updateOrderStatus: builder.mutation({
+      query: () => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: "/order/get-all-orders",
+          method: "GET",
+          // body: orderData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAllUserQuery ,useChangeUserStatusMutation} = adminApi;
+export const {
+  useGetAllUserQuery,
+  useChangeUserStatusMutation,
+  useGetAllOrdersQuery,
+  useUpdateOrderStatusMutation,
+} = adminApi;
