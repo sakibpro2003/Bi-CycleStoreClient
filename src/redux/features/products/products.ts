@@ -14,8 +14,35 @@ const productsApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    deleteProduct: builder.mutation({
+      query: (id) => {
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/products/${id}`,
+          method: "DELETE",
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAllproductsQuery, useGetSingleProductsQuery } =
-  productsApi;
+export const { 
+  useGetAllproductsQuery, 
+  useGetSingleProductsQuery, 
+  useDeleteProductMutation 
+} = productsApi;
+
+export default productsApi;

@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ManageUsers from "./ManageUsers";
 import ManageProducts from "./ManageProducts";
 import ManageOrders from "./ManageOrders";
-// import ManageUsers from "./ManageUsers";
-// import ManageProducts from "./ManageProducts";
-// import ManageOrders from "./ManageOrders";
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState("users");
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    return localStorage.getItem("adminActiveTab") || "users"; // Get from localStorage or default to 'users'
+  });
+
+  useEffect(() => {
+    localStorage.setItem("adminActiveTab", activeTab); // Store active tab in localStorage
+  }, [activeTab]);
 
   return (
     <div className="flex h-screen">

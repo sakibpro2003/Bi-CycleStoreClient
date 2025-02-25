@@ -6,7 +6,6 @@ import Register from "./pages/Register";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./layouts/ProtectedRoute";
-// import Products from "./pages/dashboard/Products";
 import BikeDetails from "./pages/BikeDetails";
 import Checkout from "./pages/Checkout";
 import Bicycles from "./pages/Bicycles";
@@ -14,7 +13,6 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import CustomerDashboard from "./pages/dashboard/customer/CustomerDashboard";
 import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
 import Products from "./pages/dashboard/customer/Products";
-// import AdminDashboard from "./pages/dashboard/AdminDashboard";
 
 const router = createBrowserRouter([
   {
