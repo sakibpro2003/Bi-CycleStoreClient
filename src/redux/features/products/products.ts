@@ -36,13 +36,37 @@ const productsApi = baseApi.injectEndpoints({
         };
       },
     }),
+    createProduct: builder.mutation({
+      query: (productData) => {
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/products`,
+          method: "POST",
+          body:productData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
 export const { 
   useGetAllproductsQuery, 
   useGetSingleProductsQuery, 
-  useDeleteProductMutation 
+  useDeleteProductMutation ,
+  useCreateProductMutation
 } = productsApi;
 
 export default productsApi;

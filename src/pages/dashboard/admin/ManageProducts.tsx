@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { useGetAllproductsQuery, useDeleteProductMutation } from "../../../redux/features/products/products";
+import { useGetAllproductsQuery, useDeleteProductMutation, useCreateProductMutation } from "../../../redux/features/products/products";
+import { toast } from "react-toastify";
 
 const ManageProducts = () => {
+    const [createProduct, { isLoading: isCreating }] = useCreateProductMutation();
+
   const { data, error, isLoading, refetch } = useGetAllproductsQuery(undefined);
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
@@ -38,10 +41,26 @@ const ManageProducts = () => {
   };
 
   const handleCreateProduct = async () => {
-    console.log("Creating product:", newProduct);
-    setIsCreateModalOpen(false);
-    refetch();
-  };
+    try {
+        const res = await createProduct(newProduct).unwrap();
+        console.log(res)
+        setIsCreateModalOpen(false);
+        setNewProduct({
+            name: "",
+            brand: "",
+            type: "",
+            price: "",
+            quantity: "",
+            description: "",
+        });
+        if(res.data){
+            toast.success("Bi-Cycle created successfully")
+        }
+        refetch();
+    } catch (error) {
+        console.error("Error creating product:", error);
+    }
+};
 
   if (isLoading) return <p className="text-center text-lg">Loading products...</p>;
   if (error) return <p className="text-center text-red-500">Error fetching products</p>;
