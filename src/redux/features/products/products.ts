@@ -60,7 +60,8 @@ const productsApi = baseApi.injectEndpoints({
       },
     }),
     updateProduct: builder.mutation({
-      query: ({productData,id}) => {
+      query: ({updatedProduct,id}) => {
+        console.log(updatedProduct,id,'prodata')
         const storedAuth = localStorage.getItem("persist:auth");
 
         if (!storedAuth) {
@@ -74,7 +75,7 @@ const productsApi = baseApi.injectEndpoints({
         return {
           url: `/products/${id}`,
           method: "PUT",
-          body:productData,
+          body:updatedProduct,
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
             "Content-Type": "application/json",
