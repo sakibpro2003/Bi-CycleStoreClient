@@ -167,7 +167,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        <span className="mr-4 font-semibold">{userRole.toUpperCase()}</span>
+        {/* <span className="mr-4 font-semibold">{userRole.toUpperCase()}</span> */}
         <button onClick={handleLogOut} className="btn">
           Logout
         </button>

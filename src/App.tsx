@@ -13,6 +13,7 @@ import Bicycles from "./pages/Bicycles";
 import Dashboard from "./pages/dashboard/Dashboard";
 import CustomerDashboard from "./pages/dashboard/customer/CustomerDashboard";
 import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
+import Products from "./pages/dashboard/customer/Products";
 // import AdminDashboard from "./pages/dashboard/AdminDashboard";
 
 const router = createBrowserRouter([
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
-      // { path: "products", element: <Products></Products> },
+      { path: "products", element: <Products></Products> },
       { path: "products/:id", element: <BikeDetails></BikeDetails> },
       { path: "products/checkout/:id", element: <Checkout></Checkout> },
     ],
