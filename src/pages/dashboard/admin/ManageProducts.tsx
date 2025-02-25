@@ -1,12 +1,11 @@
-import React from "react";
-// import { useGetAllproductsQuery, useDeleteProductMutation } from "../../api/productsApi";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useDeleteProductMutation, useGetAllproductsQuery } from "../../../redux/features/products/products";
 
 const ManageProducts: React.FC = () => {
-  const { data, isLoading, refetch } = useGetAllproductsQuery(undefined
-    
-  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const { data, isLoading, refetch } = useGetAllproductsQuery(undefined);
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
 
   const handleDelete = async (id: string) => {
@@ -22,6 +21,10 @@ const ManageProducts: React.FC = () => {
   };
 
   if (isLoading) return <p className="text-center">Loading products...</p>;
+
+  // Pagination logic
+  const totalPages = Math.ceil((data?.data?.length || 0) / itemsPerPage);
+  const paginatedData = data?.data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="container mx-auto p-4">
@@ -39,7 +42,7 @@ const ManageProducts: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((product: any) => (
+            {paginatedData?.map((product: any) => (
               <tr key={product._id}>
                 <td className="border px-4 py-2">{product.name}</td>
                 <td className="border px-4 py-2">{product.brand}</td>
@@ -59,6 +62,32 @@ const ManageProducts: React.FC = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        <button
+          className="btn btn-primary mx-2"
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            className={`btn mx-1 ${currentPage === index + 1 ? "btn-active" : "btn-secondary"}`}
+            onClick={() => setCurrentPage(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className="btn btn-primary mx-2"
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
