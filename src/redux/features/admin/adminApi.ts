@@ -2,30 +2,30 @@ import { baseApi } from "../../api/baseApi";
 
 const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // makeOrder: builder.mutation({
-    //   query: (orderData) => {
-    //     // Extract token before returning the query object
-    //     const storedAuth = localStorage.getItem("persist:auth");
+    changeUserStatus: builder.mutation({
+      query: (requestData) => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
 
-    //     if (!storedAuth) {
-    //       console.error("No auth data found!");
-    //       return;
-    //     }
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
 
-    //     const parsedAuth = JSON.parse(storedAuth);
-    //     const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
 
-    //     return {
-    //       url: "/order",
-    //       method: "POST",
-    //       body: orderData,
-    //       headers: {
-    //         Authorization: token ? `Bearer ${token}` : "",
-    //         "Content-Type": "application/json",
-    //       },
-    //     };
-    //   },
-    // }),
+        return {
+          url: "/admin/change-user-status",
+          method: "PUT",
+          body: requestData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
     getAllUser: builder.query({
       query: () => {
         // Extract token before returning the query object
@@ -53,4 +53,4 @@ const adminApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUserQuery } = adminApi;
+export const { useGetAllUserQuery ,useChangeUserStatusMutation} = adminApi;
