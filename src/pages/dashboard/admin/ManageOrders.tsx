@@ -98,7 +98,6 @@ const ManageOrders = () => {
   const { data, error, isLoading, refetch } = useGetAllOrdersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation();
   const [loadingOrderId, setLoadingOrderId] = useState<string | null>(null);
-  console.log(data,"dataaaa")
 
   if (isLoading) return <p className="text-center text-lg">Loading orders...</p>;
   if (error) return <p className="text-center text-red-500">Error fetching orders</p>;
