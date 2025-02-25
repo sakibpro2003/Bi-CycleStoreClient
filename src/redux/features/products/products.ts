@@ -59,6 +59,29 @@ const productsApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateProduct: builder.mutation({
+      query: ({productData,id}) => {
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/products/${id}`,
+          method: "PUT",
+          body:productData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -66,7 +89,8 @@ export const {
   useGetAllproductsQuery, 
   useGetSingleProductsQuery, 
   useDeleteProductMutation ,
-  useCreateProductMutation
+  useCreateProductMutation,
+  useUpdateProductMutation
 } = productsApi;
 
 export default productsApi;
