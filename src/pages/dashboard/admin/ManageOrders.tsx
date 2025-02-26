@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useGetAllOrdersQuery } from "../../../redux/features/admin/adminApi";
 import { useChangeOrderStatusMutation, useDeleteOrderMutation } from "../../../redux/features/orders/ordersApi";
+import { TOrder } from "./types/order.types";
 
 const ManageOrders = () => {
   const [deleteOrder] = useDeleteOrderMutation();
@@ -66,7 +67,7 @@ const ManageOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((order, index) => (
+            {data?.data?.map((order:TOrder, index:string) => (
               <tr key={order._id} className="border-b hover:bg-gray-100">
                 <td className="p-3">{index + 1}</td>
                 <td className="p-3">{order.address}</td>

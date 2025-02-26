@@ -43,16 +43,18 @@ const Checkout = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // console.log(token, "token");
+  
     try {
       const response = await makeOrder({ ...formData, totalPrice }).unwrap();
-      toast.success("Order placed successfully")
-      // console.log("Order placed successfully:", response);
-    } catch (err) {
+      toast.success("Order placed successfully");
+    } catch (err: any) {
+      const errorMessage =
+        err?.data?.message || "Failed to place order. Please try again.";
+      toast.error(errorMessage);
       console.error("Error placing order:", err);
     }
   };
+  
 
   return (
     <form
