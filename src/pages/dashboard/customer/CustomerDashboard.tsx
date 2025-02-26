@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ViewOrders from "./ViewOrders";
 import ManageProfile from "./ManageProfile";
-// import ViewOrders from "./ViewOrders";
-// import ManageProfile from "./ManageProfile";
+// import ViewOrders from "./ViewOrder
 
 const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState("orders");

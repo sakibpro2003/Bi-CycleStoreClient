@@ -1,5 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
+
 const ordersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     makeOrder: builder.mutation({
@@ -43,6 +44,30 @@ const ordersApi = baseApi.injectEndpoints({
           url: "/order",
           method: "GET",
           // body: orderData,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+    updateUserInfo: builder.mutation({
+      query: ({ userPayload}) => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/user/change-user-info`,
+          method: "PUT",
+          body: userPayload,
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
             "Content-Type": "application/json",
@@ -103,5 +128,5 @@ const ordersApi = baseApi.injectEndpoints({
 export const {
   useMakeOrderMutation,
   useGetOrdersQuery,
-  useDeleteOrderMutation,useChangeOrderStatusMutation
+  useDeleteOrderMutation,useChangeOrderStatusMutation,useUpdateUserInfoMutation
 } = ordersApi;

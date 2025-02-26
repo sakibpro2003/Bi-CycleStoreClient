@@ -1,119 +1,247 @@
 import { useState } from "react";
 import { useChangePasswordMutation } from "../../../redux/features/auth/authApi";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { useUpdateUserInfoMutation } from "../../../redux/features/orders/ordersApi";
 
 const ManageProfile = () => {
   const [changePassword, { isLoading, error }] = useChangePasswordMutation();
 
-  const [formData, setFormData] = useState({
+  const [passwordData, setPasswordData] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
 
+  const [profileData, setProfileData] = useState({
+    name: "",
+    phone: "",
+    gender: "Male",
+    email: "",
+  });
+
   const [message, setMessage] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setMessage(""); // Reset message on input change
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+    setMessage("");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [updateUserInfo] = useUpdateUserInfoMutation();
+
+  const handleProfileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const response = await updateUserInfo({  userPayload: profileData }).unwrap();
+      console.log("Profile Updated Successfully:", response);
+    } catch (err) {
+      console.error("Profile Update Failed:", err);
+    }
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !formData.oldPassword ||
-      !formData.newPassword ||
-      !formData.confirmPassword
-    ) {
+    if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
       setMessage("All fields are required!");
       return;
     }
 
-    if (formData.newPassword !== formData.confirmPassword) {
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
       setMessage("New passwords do not match!");
       return;
     }
 
-    console.log(formData, "fdata");
-
     try {
-      const response = await changePassword({
-        oldPassword: formData.oldPassword,
-        newPassword: formData.newPassword,
-        confirmPassword: formData.confirmPassword,
-      }).unwrap();
-
+      const response = await changePassword(passwordData).unwrap();
       setMessage(response?.message || "Password changed successfully!");
-      setFormData({ oldPassword: "", newPassword: "", confirmPassword: "" }); // Reset form
+      setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
     } catch (err: any) {
       setMessage(err?.data?.message || "Failed to change password.");
     }
   };
 
   return (
+    <>
+      <Tabs>
+        <TabList>
+          <Tab>Update Profile</Tab>
+          <Tab>Change Password</Tab>
+        </TabList>
+
+        {/* <TabPanel>
+          <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-center mb-4">Update Profile</h2>
+            <form>
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Name</span></label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  className="input input-bordered w-full"
+                  value={profileData.name}
+                  onChange={handleProfileChange}
+                />
+              </div>
+
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Phone</span></label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="Enter your phone number"
+                  className="input input-bordered w-full"
+                  value={profileData.phone}
+                  onChange={handleProfileChange}
+                />
+              </div>
+
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Gender</span></label>
+                <select
+                  name="gender"
+                  className="select select-bordered w-full"
+                  value={profileData.gender}
+                  onChange={handleProfileChange}
+                >
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Non-Binary</option>
+                  <option>Other</option>
+                  <option>Prefer Not to Say</option>
+                </select>
+              </div>
+
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Email</span></label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="input input-bordered w-full"
+                  value={profileData.email}
+                  onChange={handleProfileChange}
+                />
+              </div>
+
+             
+
+              <button type="submit" className="btn btn-primary w-full mt-4">Update Profile</button>
+            </form>
+          </div>
+        </TabPanel> */}
+         <TabPanel>
     <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-center mb-4">Change Password</h2>
-
-      {message && (
-        <p
-          className={`text-center ${error ? "text-red-500" : "text-green-500"}`}
-        >
-          {message}
-        </p>
-      )}
-
-      <form onSubmit={handleSubmit}>
+      <h2 className="text-2xl font-bold text-center mb-4">Update Profile</h2>
+      <form onSubmit={handleProfileSubmit}>
         <div className="form-control mb-3">
-          <label className="label">
-            <span className="label-text">Old Password</span>
-          </label>
+          <label className="label"><span className="label-text">Name</span></label>
           <input
-            type="password"
-            name="oldPassword"
-            placeholder="Enter old password"
+            type="text"
+            name="name"
+            placeholder="Enter your name"
             className="input input-bordered w-full"
-            value={formData.oldPassword}
-            onChange={handleChange}
+            value={profileData.name}
+            onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
           />
         </div>
 
         <div className="form-control mb-3">
-          <label className="label">
-            <span className="label-text">New Password</span>
-          </label>
+          <label className="label"><span className="label-text">Phone</span></label>
           <input
-            type="password"
-            name="newPassword"
-            placeholder="Enter new password"
+            type="text"
+            name="phone"
+            placeholder="Enter your phone number"
             className="input input-bordered w-full"
-            value={formData.newPassword}
-            onChange={handleChange}
+            value={profileData.phone}
+            onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
           />
         </div>
 
         <div className="form-control mb-3">
-          <label className="label">
-            <span className="label-text">Confirm New Password</span>
-          </label>
+          <label className="label"><span className="label-text">Gender</span></label>
+          <select
+            name="gender"
+            className="select select-bordered w-full"
+            value={profileData.gender}
+            onChange={(e) => setProfileData({ ...profileData, gender: e.target.value })}
+          >
+            <option>Male</option>
+            <option>Female</option>
+            <option>Non-Binary</option>
+            <option>Other</option>
+            <option>Prefer Not to Say</option>
+          </select>
+        </div>
+
+        <div className="form-control mb-3">
+          <label className="label"><span className="label-text">Email</span></label>
           <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm new password"
+            type="email"
+            name="email"
+            placeholder="Enter your email"
             className="input input-bordered w-full"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            value={profileData.email}
+            onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
           />
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary w-full mt-4"
-          disabled={isLoading}
-        >
-          {isLoading ? "Changing..." : "Change Password"}
+        <button type="submit" className="btn btn-primary w-full mt-4">
+          Update Profile
         </button>
       </form>
     </div>
+  </TabPanel>
+
+        <TabPanel>
+          <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-center mb-4">Change Password</h2>
+            {message && <p className={`text-center ${error ? "text-red-500" : "text-green-500"}`}>{message}</p>}
+            <form onSubmit={handlePasswordSubmit}>
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Old Password</span></label>
+                <input
+                  type="password"
+                  name="oldPassword"
+                  placeholder="Enter old password"
+                  className="input input-bordered w-full"
+                  value={passwordData.oldPassword}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">New Password</span></label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  placeholder="Enter new password"
+                  className="input input-bordered w-full"
+                  value={passwordData.newPassword}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+
+              <div className="form-control mb-3">
+                <label className="label"><span className="label-text">Confirm New Password</span></label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm new password"
+                  className="input input-bordered w-full"
+                  value={passwordData.confirmPassword}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary w-full mt-4" disabled={isLoading}>{isLoading ? "Changing..." : "Change Password"}</button>
+            </form>
+          </div>
+        </TabPanel>
+      </Tabs>
+    </>
   );
 };
 

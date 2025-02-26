@@ -24,7 +24,9 @@ const Register = () => {
       });
       navigate("/login");
     } catch (err) {
-      toast.error("Registration failed. Please try again.", { position: "top-right" });
+      toast.error("Registration failed. Please try again.", {
+        position: "top-right",
+      });
     }
   };
 
@@ -46,7 +48,9 @@ const Register = () => {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-900">Name</label>
+                <label className="block text-sm font-medium text-gray-900">
+                  Name
+                </label>
                 <input
                   type="text"
                   {...register("name")}
@@ -56,7 +60,9 @@ const Register = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-900">Email address</label>
+                <label className="block text-sm font-medium text-gray-900">
+                  Email address
+                </label>
                 <input
                   type="email"
                   {...register("email")}
@@ -66,7 +72,9 @@ const Register = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-900">Phone</label>
+                <label className="block text-sm font-medium text-gray-900">
+                  Phone
+                </label>
                 <input
                   type="text"
                   {...register("phone")}
@@ -76,7 +84,9 @@ const Register = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-900">Gender</label>
+                <label className="block text-sm font-medium text-gray-900">
+                  Gender
+                </label>
                 <select
                   {...register("gender")}
                   required
@@ -91,7 +101,9 @@ const Register = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-900">Password</label>
+                <label className="block text-sm font-medium text-gray-900">
+                  Password
+                </label>
                 <input
                   type="password"
                   {...register("password")}
