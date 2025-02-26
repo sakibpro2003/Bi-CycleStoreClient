@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import {
@@ -6,6 +7,7 @@ import {
   useCreateProductMutation,
   useUpdateProductMutation,
 } from "../../../redux/features/products/products";
+import { TUpdateProduct } from "./types/productUpdate.types";
 
 const ManageProducts: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +49,7 @@ const ManageProducts: React.FC = () => {
   const openAddProductModal = () => {
     addProductModalRef.current?.showModal();
   };
-  const openUpdateProductModal = (product: any) => {
+  const openUpdateProductModal = (product: TUpdateProduct) => {
     setUpdatedProduct({
       name: product.name,
       brand: product.brand,
@@ -66,8 +68,10 @@ const ManageProducts: React.FC = () => {
       await deleteProduct(selectedProductId).unwrap();
       toast.success("Product deleted successfully");
       refetch();
-    } catch (error) {
-      toast.error("Failed to delete product");
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.message || "Failed to delete product. Please try again.";
+      toast.error(errorMessage);
     }
     modalRef.current?.close();
   };
@@ -80,25 +84,27 @@ const ManageProducts: React.FC = () => {
       }
       refetch();
       addProductModalRef.current?.close();
-    } catch (error) {
-      toast.error("Failed to add product");
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.message || "Failed to add product. Please try again.";
+      toast.error(errorMessage);
     }
   };
-
-  
   const handleUpdateProduct = async () => {
     if (!selectedProductId) return;
 
     try {
       await updateProduct({
-        updatedProduct, 
-        id: selectedProductId, 
+        updatedProduct,
+        id: selectedProductId,
       }).unwrap();
       toast.success("Product updated successfully");
       refetch();
       addProductModalRef.current?.close();
-    } catch (error) {
-      toast.error("Failed to update product");
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.message || "Failed to update product. Please try again.";
+      toast.error(errorMessage);
     }
   };
 
