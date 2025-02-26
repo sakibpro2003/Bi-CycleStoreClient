@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useChangePasswordMutation } from "../../../redux/features/auth/authApi";
 
-
 const ManageProfile = () => {
   const [changePassword, { isLoading, error }] = useChangePasswordMutation();
-  
+
   const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -21,7 +20,11 @@ const ManageProfile = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.oldPassword || !formData.newPassword || !formData.confirmPassword) {
+    if (
+      !formData.oldPassword ||
+      !formData.newPassword ||
+      !formData.confirmPassword
+    ) {
       setMessage("All fields are required!");
       return;
     }
@@ -51,7 +54,13 @@ const ManageProfile = () => {
     <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-center mb-4">Change Password</h2>
 
-      {message && <p className={`text-center ${error ? "text-red-500" : "text-green-500"}`}>{message}</p>}
+      {message && (
+        <p
+          className={`text-center ${error ? "text-red-500" : "text-green-500"}`}
+        >
+          {message}
+        </p>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="form-control mb-3">
@@ -96,7 +105,11 @@ const ManageProfile = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-full mt-4" disabled={isLoading}>
+        <button
+          type="submit"
+          className="btn btn-primary w-full mt-4"
+          disabled={isLoading}
+        >
           {isLoading ? "Changing..." : "Change Password"}
         </button>
       </form>
@@ -105,72 +118,3 @@ const ManageProfile = () => {
 };
 
 export default ManageProfile;
-
-
-// import { useGetAllUserQuery } from "../../../redux/features/admin/adminApi";
-
-// const UserManagement = () => {
-//   const { data, error, isLoading } = useGetAllUserQuery(undefined);
-//   const [updateUserStatus] = useUpdateUserStatusMutation(); // Mutation hook
-
-//   if (isLoading) return <p className="text-center text-lg">Loading...</p>;
-//   if (error) return <p className="text-center text-red-500">Error fetching users</p>;
-
-//   const handleStatusToggle = async (userId: string, isBlocked: boolean) => {
-//     try {
-//       await updateUserStatus({ userId, isBlocked: !isBlocked }).unwrap();
-//       alert(`User status updated successfully!`);
-//     } catch (err) {
-//       console.error("Error updating user status:", err);
-//       alert("Failed to update user status.");
-//     }
-//   };
-
-//   return (
-//     <div className="container mx-auto p-6">
-//       <h1 className="text-3xl font-bold text-center mb-6">User Management</h1>
-
-//       <div className="overflow-x-auto">
-//         <table className="table w-full border">
-//           <thead>
-//             <tr className="bg-gray-200 text-gray-700">
-//               <th className="p-3">#</th>
-//               <th className="p-3">Name</th>
-//               <th className="p-3">Email</th>
-//               <th className="p-3">Role</th>
-//               <th className="p-3">Status</th>
-//               <th className="p-3">Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {data?.data?.map((user, index) => (
-//               <tr key={user._id} className="border-b hover:bg-gray-100">
-//                 <td className="p-3">{index + 1}</td>
-//                 <td className="p-3">{user.name}</td>
-//                 <td className="p-3">{user.email}</td>
-//                 <td className="p-3">{user.role}</td>
-//                 <td className="p-3">
-//                   {user.isBlocked ? (
-//                     <span className="badge badge-error">Deactivated</span>
-//                   ) : (
-//                     <span className="badge badge-success">Active</span>
-//                   )}
-//                 </td>
-//                 <td className="p-3">
-//                   <button
-//                     onClick={() => handleStatusToggle(user._id, user.isBlocked)}
-//                     className={`btn btn-sm ${user.isBlocked ? "btn-success" : "btn-error"}`}
-//                   >
-//                     {user.isBlocked ? "Activate" : "Deactivate"}
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UserManagement;

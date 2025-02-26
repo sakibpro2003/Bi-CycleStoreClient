@@ -9,6 +9,13 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+    register: builder.mutation({
+      query: (userInfo) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: userInfo,
+      }),
+    }),
 
     changePassword: builder.mutation({
       query: (userCredentials) => {
@@ -20,8 +27,6 @@ const authApi = baseApi.injectEndpoints({
           return;
         }
 
-        // const parsedAuth = JSON.parse(storedAuth);
-        // const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
 
         try {
           const storedAuth = localStorage.getItem("persist:auth");
@@ -49,4 +54,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useChangePasswordMutation } = authApi;
+export const { useLoginMutation, useChangePasswordMutation,useRegisterMutation } = authApi;
