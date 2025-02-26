@@ -1,27 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleProductsQuery } from "../redux/features/products/products";
 
 const BikeDetails = () => {
   const { id } = useParams();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const { data, isLoading, error } = useGetSingleProductsQuery(id);
 
-  const handleCheckout = (id)=>{
-    console.log(id)
-    navigate(`/products/checkout/${id}`)
-  }
+  const handleCheckout = (id: any) => {
+    console.log(id);
+    navigate(`/products/checkout/${id}`);
+  };
 
-  // Ensure data exists before destructuring, fallback to an empty object
-  const {
-    name,
-    brand,
-    description,
-
-    price,
-    quantity,
-    type,
-    image,
-  } = data?.data || {};
+  const { name, brand, description, price, quantity, type, image } =
+    data?.data || {};
 
   let inStock;
   if (quantity > 0) {
@@ -91,7 +83,12 @@ const BikeDetails = () => {
               </div>
 
               {/* Call-to-action Button */}
-              <button onClick={()=>handleCheckout(id)} className="mt-6 w-full btn text-lg">Buy Now</button>
+              <button
+                onClick={() => handleCheckout(id)}
+                className="mt-6 w-full btn text-lg"
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>

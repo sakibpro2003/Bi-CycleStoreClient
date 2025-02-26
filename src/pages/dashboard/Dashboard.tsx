@@ -11,12 +11,7 @@ const Dashboard = () => {
     if (!user) {
       navigate("/login");
     }
-    navigate("/dashboard/admin")
-    //  else if (user.role === "admin") {
-    //   navigate("/dashboard/admin");
-    // } else {
-    //   navigate("/dashboard/user");
-    // }
+    navigate("/dashboard/admin");
   }, [user, navigate]);
 
   return <div>Redirecting...</div>;

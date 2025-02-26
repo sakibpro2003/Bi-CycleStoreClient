@@ -1,4 +1,5 @@
 import { useGetOrdersQuery } from "../../../redux/features/orders/ordersApi";
+import { TOrderCustomer } from "./types/OrderTypesCustomer";
 
 const ViewOrders = () => {
   const { data, error, isLoading } = useGetOrdersQuery(undefined);
@@ -17,7 +18,11 @@ const ViewOrders = () => {
   }
 
   if (error) {
-    return <p className="text-red-500 text-center">Error loading orders. Please try again.</p>;
+    return (
+      <p className="text-red-500 text-center">
+        Error loading orders. Please try again.
+      </p>
+    );
   }
 
   const orders = data?.data || [];
@@ -43,10 +48,10 @@ const ViewOrders = () => {
 
             {/* Table Body */}
             <tbody>
-              {orders.map((order) => (
+              {orders.map((order: TOrderCustomer) => (
                 <tr key={order._id} className="hover">
                   <td className="p-3">{order.image}</td>
-                  <td className="p-3">{order.products?.name || "N/A"}</td>
+                  <td className="p-3">{order.name}</td>
                   <td className="p-3">{order.quantity}</td>
                   <td className="p-3">{order.address}</td>
                   <td className="p-3">{order.phone}</td>
@@ -54,9 +59,9 @@ const ViewOrders = () => {
                   <td className="p-3">
                     <span
                       className={`badge ${
-                        order.status === "pending"
+                        order.status == "Pending"
                           ? "badge-warning"
-                          : order.status === "completed"
+                          : order.status == "Completed"
                           ? "badge-success"
                           : "badge-error"
                       }`}

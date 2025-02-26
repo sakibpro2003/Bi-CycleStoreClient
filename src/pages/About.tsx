@@ -1,5 +1,3 @@
-import React from "react";
-
 const About = () => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
@@ -9,10 +7,10 @@ const About = () => {
         </h1>
 
         <p className="text-lg text-gray-700 text-center mb-8">
-          Welcome to <strong>Bi-CycleStore</strong>, your one-stop
-          destination for high-quality bicycles and accessories. Whether you're
-          a professional cyclist or a casual rider, we provide the best
-          selection for all terrains and styles.
+          Welcome to <strong>Bi-CycleStore</strong>, your one-stop destination
+          for high-quality bicycles and accessories. Whether you're a
+          professional cyclist or a casual rider, we provide the best selection
+          for all terrains and styles.
         </p>
 
         {/* Mission & Vision Section */}
@@ -86,10 +84,10 @@ const About = () => {
           </h2>
           <p className="text-xl text-gray-700">
             <strong>
-              Store Address: 🚲 Cycle World BD  House #12, Road #5, Sector
-              #7  Uttara, Dhaka-1230, Bangladesh
-              <br /> 📞 Phone: +880 1712-345678 ✉️
-              Email: support@cycleworldbd.com
+              Store Address: 🚲 Cycle World BD House #12, Road #5, Sector #7
+              Uttara, Dhaka-1230, Bangladesh
+              <br /> 📞 Phone: +880 1712-345678 ✉️ Email:
+              support@cycleworldbd.com
             </strong>{" "}
             – Open daily from <strong>9 AM - 8 PM</strong>.
           </p>

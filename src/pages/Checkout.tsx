@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetSingleProductsQuery } from "../redux/features/products/products";
@@ -11,7 +12,7 @@ const Checkout = () => {
 
   // Extract product details
   const name = data?.data?.name;
-  const productPrice = data?.data?.price || 0; // Default price if not found
+  const productPrice = data?.data?.price || 0;
 
   // Initialize form data state
   const [formData, setFormData] = useState({
@@ -46,7 +47,10 @@ const Checkout = () => {
   
     try {
       const response = await makeOrder({ ...formData, totalPrice }).unwrap();
-      toast.success("Order placed successfully");
+      if(response){
+        toast.success("Order placed successfully");
+
+      }
     } catch (err: any) {
       const errorMessage =
         err?.data?.message || "Failed to place order. Please try again.";

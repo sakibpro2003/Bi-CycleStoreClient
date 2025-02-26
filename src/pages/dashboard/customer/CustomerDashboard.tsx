@@ -1,14 +1,12 @@
 import { useState } from "react";
 import ViewOrders from "./ViewOrders";
 import ManageProfile from "./ManageProfile";
-// import ViewOrders from "./ViewOrder
 
 const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState("orders");
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       <div className="w-64 bg-blue-900 text-white p-5 space-y-4">
         <h2 className="text-2xl font-bold">User Dashboard</h2>
         <ul className="space-y-3">

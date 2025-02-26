@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, useForm } from "react-hook-form";
 import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
@@ -23,10 +24,11 @@ const Register = () => {
         transition: Bounce,
       });
       navigate("/login");
-    } catch (err) {
-      toast.error("Registration failed. Please try again.", {
-        position: "top-right",
-      });
+    } catch (err:any) {
+      const errorMessage =
+      err?.data?.message || "Failed to register. Please try again.";
+      toast.error(errorMessage);
+      
     }
   };
 

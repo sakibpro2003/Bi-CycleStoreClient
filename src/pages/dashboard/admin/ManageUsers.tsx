@@ -1,6 +1,7 @@
 import { useGetAllUserQuery, useChangeUserStatusMutation } from "../../../redux/features/admin/adminApi";
 import { useState } from "react";
 import { toast } from "react-toastify"; // Import a toast library (optional)
+import { TShowUser } from "./types/showUser.type";
 
 const UserManagement = () => {
   const { data, error, isLoading, refetch } = useGetAllUserQuery(undefined);
@@ -8,6 +9,7 @@ const UserManagement = () => {
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null); // Track which user is updating
 
   if (isLoading) return <p className="text-center text-lg">Loading...</p>;
+  if (isUpdating) return <p className="text-center text-lg">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error fetching users</p>;
 
   const handleStatusToggle = async (userId: string, isBlocked: boolean) => {
@@ -15,7 +17,10 @@ const UserManagement = () => {
 
     try {
       const response = await changeUserStatus({ userId, isBlocked: !isBlocked }).unwrap();
-      toast.success(`User ${!isBlocked ? "deactivated" : "activated"} successfully`);
+      if(response){
+
+        toast.success(`User ${!isBlocked ? "deactivated" : "activated"} successfully`);
+      }
       refetch(); // Refresh the user list
     } catch (error) {
       console.error("Error updating user status:", error);
@@ -42,7 +47,7 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((user, index) => (
+            {data?.data?.map((user:TShowUser, index:string) => (
               <tr key={user._id} className="border-b hover:bg-gray-100">
                 <td className="p-3">{index + 1}</td>
                 <td className="p-3">{user.name}</td>

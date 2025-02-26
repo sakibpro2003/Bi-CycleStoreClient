@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useChangePasswordMutation } from "../../../redux/features/auth/authApi";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -37,8 +38,8 @@ const ManageProfile = () => {
       const response = await updateUserInfo({
         userPayload: profileData,
       }).unwrap();
-      if(response){
-        toast.success("Profile updated successfully")
+      if (response) {
+        toast.success("Profile updated successfully");
       }
       console.log("Profile Updated Successfully:", response);
     } catch (err) {
@@ -142,9 +143,7 @@ const ManageProfile = () => {
                 </select>
               </div>
 
-              <div className="form-control mb-3">
-                
-              </div>
+              <div className="form-control mb-3"></div>
 
               <button type="submit" className="btn btn-primary w-full mt-4">
                 Update Profile
