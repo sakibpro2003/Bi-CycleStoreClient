@@ -50,7 +50,58 @@ const ordersApi = baseApi.injectEndpoints({
         };
       },
     }),
+    deleteOrder: builder.mutation({
+      query: (orderId) => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/order/${orderId}`,
+          method: "DELETE",
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+    changeOrderStatus: builder.mutation({
+      query: ({ orderId, status }) => {
+        // Extract token before returning the query object
+        const storedAuth = localStorage.getItem("persist:auth");
+
+        if (!storedAuth) {
+          console.error("No auth data found!");
+          return;
+        }
+
+        const parsedAuth = JSON.parse(storedAuth);
+        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+        return {
+          url: `/order/${orderId}`,
+          method: "PUT",
+          body: status,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useMakeOrderMutation,useGetOrdersQuery } = ordersApi;
+export const {
+  useMakeOrderMutation,
+  useGetOrdersQuery,
+  useDeleteOrderMutation,useChangeOrderStatusMutation
+} = ordersApi;

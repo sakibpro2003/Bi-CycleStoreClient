@@ -6,7 +6,6 @@ import {
   useCreateProductMutation,
   useUpdateProductMutation,
 } from "../../../redux/features/products/products";
-// import UpdateProductModal from "../../../components/UpdateProductModal";
 
 const ManageProducts: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -91,9 +90,9 @@ const ManageProducts: React.FC = () => {
     if (!selectedProductId) return;
 
     try {
-      const res = await updateProduct({
-        updatedProduct, // Use correct product data
-        id: selectedProductId, // Ensure ID is passed correctly
+      await updateProduct({
+        updatedProduct, 
+        id: selectedProductId, 
       }).unwrap();
       toast.success("Product updated successfully");
       refetch();
