@@ -1,25 +1,30 @@
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useGetAllOrdersQuery } from "../../../redux/features/admin/adminApi";
-import { useDeleteOrderMutation } from "../../../redux/features/orders/ordersApi";
+import { useChangeOrderStatusMutation, useDeleteOrderMutation } from "../../../redux/features/orders/ordersApi";
 
 const ManageOrders = () => {
   const [deleteOrder] = useDeleteOrderMutation();
   const { data, error, isLoading, refetch } = useGetAllOrdersQuery(undefined);
   const [loadingOrderId, setLoadingOrderId] = useState<string | null>(null);
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
+  const [changeOrderStatus, { isLoading: isChangingStatus }] = useChangeOrderStatusMutation();
 
+  const statusTypes = ["Pending", "Paid", "Shipped", "Completed", "Cancelled"];
   const modalRef = useRef<HTMLDialogElement>(null);
 
   if (isLoading) return <p className="text-center text-lg">Loading orders...</p>;
   if (error) return <p className="text-center text-red-500">Error fetching orders</p>;
 
-  const handleUpdateOrder = (orderId: string) => {
-    setLoadingOrderId(orderId);
-    setTimeout(() => {
-      toast.success("Order updated successfully");
-      setLoadingOrderId(null);
-    }, 1000);
+  const handleChangeStatus = async (orderId: string, newStatus: string) => {
+    try {
+      await changeOrderStatus({ orderId, status: { status: newStatus } }).unwrap();
+      toast.success(`Order status updated to ${newStatus}`);
+      refetch();
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      toast.error("Failed to update order status.");
+    }
   };
 
   const openDeleteModal = (orderId: string) => {
@@ -68,20 +73,20 @@ const ManageOrders = () => {
                 <td className="p-3">{order.phone}</td>
                 <td className="p-3">${order.totalPrice}</td>
                 <td className="p-3">
-                  <span
-                    className={`badge ${
-                      order.status === "Pending"
-                        ? "badge-warning"
-                        : order.status === "Completed"
-                        ? "badge-success"
-                        : "badge-error"
-                    }`}
+                  <select
+                    onChange={(e) => handleChangeStatus(order._id, e.target.value)}
+                    value={order.status}
+                    className="select select-bordered"
+                    disabled={isChangingStatus}
                   >
-                    {order.status}
-                  </span>
+                    {statusTypes.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
                 </td>
                 <td className="p-3 flex gap-3">
-                  
                   <button
                     onClick={() => openDeleteModal(order._id)}
                     className="btn btn-sm btn-error"
