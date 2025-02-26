@@ -81,13 +81,7 @@ const ManageOrders = () => {
                   </span>
                 </td>
                 <td className="p-3 flex gap-3">
-                  <button
-                    onClick={() => handleUpdateOrder(order._id)}
-                    className="btn btn-sm btn-info"
-                    disabled={loadingOrderId === order._id}
-                  >
-                    {loadingOrderId === order._id ? "Updating..." : "Update"}
-                  </button>
+                  
                   <button
                     onClick={() => openDeleteModal(order._id)}
                     className="btn btn-sm btn-error"
