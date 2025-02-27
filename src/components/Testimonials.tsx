@@ -1,4 +1,3 @@
-
 const testimonials = [
   {
     name: "Alex Johnson",
@@ -35,19 +34,19 @@ const TestimonialCard = ({
   review: string;
 }) => {
   return (
-    <div className="flex flex-col items-center text-center p-4 border rounded-lg shadow-md">
+    <div className="flex flex-col items-center text-center p-6 border-2 border-yellow-400 rounded-lg shadow-lg bg-white">
       <img
         src={image}
         alt={name}
-        className="w-24 h-24 rounded-full border-2 border-purple-600"
+        className="w-24 h-24 rounded-full border-2 border-yellow-400"
       />
-      <h4 className="mt-4 text-lg font-bold text-gray-800">{name}</h4>
+      <h4 className="mt-4 text-lg font-bold text-black">{name}</h4>
       <div className="flex mt-2">
         {[...Array(5)].map((_, index) => (
           <svg
             key={index}
             className={`w-5 h-5 ${
-              index < rating ? "fill-purple-600" : "fill-gray-300"
+              index < rating ? "fill-yellow-400" : "fill-gray-300"
             }`}
             viewBox="0 0 14 13"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +55,7 @@ const TestimonialCard = ({
           </svg>
         ))}
       </div>
-      <p className="mt-3 text-sm text-gray-700">{review}</p>
+      <p className="mt-3 text-sm text-black">{review}</p>
     </div>
   );
 };
@@ -65,10 +64,8 @@ export default function Testimonials() {
   return (
     <div className="my-10 max-w-6xl mx-auto px-6">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-800">
-          What Our Riders Say
-        </h2>
-        <p className="text-sm mt-4 text-gray-500">
+        <h2 className="text-3xl font-bold text-black">What Our Riders Say</h2>
+        <p className="text-sm mt-4 text-black">
           See what our customers have to say about their biking experience.
         </p>
       </div>

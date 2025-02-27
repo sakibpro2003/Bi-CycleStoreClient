@@ -5,84 +5,54 @@ import BMXBike from "../assets/BMXBike.png";
 import electric from "../assets/electric.png";
 import cyclingAccessories from "../assets/cyclingAccessories.png";
 import { Link } from "react-router-dom";
+
 const FeaturedSection = () => {
   return (
-    <section className="bg-white">
-    <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-      <div className="max-w-screen-md mb-8 lg:mb-16">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-          Explore Our Exclusive Bicycles
-        </h2>
-        <p className="sm:text-xl">
-          Discover a variety of bicycles designed for all terrains and riders,
-          ensuring quality, comfort, and performance.
-        </p>
-      </div>
-      <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={mountain}
-            alt="Mountain Bike"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">Mountain Bikes</h3>
-          <p>Conquer rough terrains with our durable and high-performance mountain bikes.</p>
+    <section className="bg-white py-16 px-6">
+      <div className="mx-auto max-w-screen-xl">
+        {/* Heading Section */}
+        <div className="max-w-screen-md text-center mx-auto mb-12">
+          <h2 className="text-4xl font-extrabold text-gray-900">
+            <span className="text-yellow-400">Explore</span> Our Exclusive Bicycles
+          </h2>
+          <p className="sm:text-lg text-gray-600 mt-4">
+            Discover a variety of bicycles designed for all terrains and riders,
+            ensuring quality, comfort, and performance.
+          </p>
         </div>
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={roadBike}
-            alt="Road Bike"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">Road Bikes</h3>
-          <p>Speed through city streets with lightweight and aerodynamic road bikes.</p>
+
+        {/* Bike Categories Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            { image: mountain, title: "Mountain Bikes", desc: "Conquer rough terrains with our durable and high-performance mountain bikes." },
+            { image: roadBike, title: "Road Bikes", desc: "Speed through city streets with lightweight and aerodynamic road bikes." },
+            { image: hybridBike, title: "Hybrid Bikes", desc: "Perfect for commuting and leisure rides with a balance of comfort and speed." },
+            { image: BMXBike, title: "BMX Bikes", desc: "Perform tricks and stunts with our sturdy and agile BMX bikes." },
+            { image: electric, title: "Electric Bikes", desc: "Effortless riding with battery-powered assistance for longer journeys." },
+            { image: cyclingAccessories, title: "Cycling Accessories", desc: "Enhance your ride with top-quality helmets, gloves, and gear." },
+          ].map((item, index) => (
+            <div key={index} className="border-2 border-yellow-400 p-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="mb-4 w-full h-52 object-cover rounded-lg"
+              />
+              <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
+              <p className="text-gray-600">{item.desc}</p>
+            </div>
+          ))}
         </div>
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={hybridBike}
-            alt="Hybrid Bike"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">Hybrid Bikes</h3>
-          <p>Perfect for commuting and leisure rides with a balance of comfort and speed.</p>
-        </div>
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={BMXBike}
-            alt="BMX Bike"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">BMX Bikes</h3>
-          <p>Perform tricks and stunts with our sturdy and agile BMX bikes.</p>
-        </div>
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={electric}
-            alt="Electric Bike"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">Electric Bikes</h3>
-          <p>Effortless riding with battery-powered assistance for longer journeys.</p>
-        </div>
-        <div className="border-2 p-4 rounded-lg">
-          <img
-            src={cyclingAccessories}
-            alt="Cycling Accessories"
-            className="mb-4 w-full h-3/4 object-cover rounded-lg"
-          />
-          <h3 className="mb-2 text-xl font-bold dark:text-white">Cycling Accessories</h3>
-          <p>Enhance your ride with top-quality helmets, gloves, and gear.</p>
+
+        {/* View All Button */}
+        <div className="flex justify-center mt-12">
+          <Link to="/products">
+            <button className="px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold text-lg rounded-lg shadow-lg transition transform hover:scale-105">
+              View All
+            </button>
+          </Link>
         </div>
       </div>
-  
-      <div className="flex justify-center mt-8">
-        <Link to={"/products"}>
-        <button  className="btn">View All</button>
-        </Link>
-      </div>
-    </div>
-  </section>
-  
+    </section>
   );
 };
 
