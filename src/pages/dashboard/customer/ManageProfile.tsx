@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState } from "react";
 import { useChangePasswordMutation } from "../../../redux/features/auth/authApi";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -80,26 +80,30 @@ const ManageProfile = () => {
   return (
     <>
       <Tabs>
-        <TabList>
-          <Tab>Update Profile</Tab>
-          <Tab>Change Password</Tab>
+        <TabList className="flex mx-auto justify-center w-1/3 space-x-4 border-b-2 border-yellow-400 mb-6">
+          <Tab className="px-4 py-2  font-bold cursor-pointer border-b-4 border-transparent hover:border-yellow-500 focus:border-yellow-500">
+            Update Profile
+          </Tab>
+          <Tab className="px-4 py-2 font-bold cursor-pointer border-b-4 border-transparent hover:border-yellow-500 focus:border-yellow-500">
+            Change Password
+          </Tab>
         </TabList>
 
         <TabPanel>
-          <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-center mb-4">
+          <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg border border-yellow-400">
+            <h2 className="text-2xl font-bold text-center mb-4 text-black">
               Update Profile
             </h2>
             <form onSubmit={handleProfileSubmit}>
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text text-black">Name</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Enter your name"
-                  className="input input-bordered w-full"
+                  className="input border-2 broder-yellow-300 input-bordered w-full"
                   value={profileData.name}
                   onChange={(e) =>
                     setProfileData({ ...profileData, name: e.target.value })
@@ -109,7 +113,7 @@ const ManageProfile = () => {
 
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">Phone</span>
+                  <span className="label-text text-black">Phone</span>
                 </label>
                 <input
                   type="text"
@@ -125,7 +129,7 @@ const ManageProfile = () => {
 
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">Gender</span>
+                  <span className="label-text text-black">Gender</span>
                 </label>
                 <select
                   name="gender"
@@ -143,9 +147,7 @@ const ManageProfile = () => {
                 </select>
               </div>
 
-              <div className="form-control mb-3"></div>
-
-              <button type="submit" className="btn btn-primary w-full mt-4">
+              <button type="submit" className="btn bg-yellow-500 text-black w-full mt-4 hover:bg-yellow-600">
                 Update Profile
               </button>
             </form>
@@ -153,8 +155,8 @@ const ManageProfile = () => {
         </TabPanel>
 
         <TabPanel>
-          <div className="max-w-md mx-auto mt-10 bg-base-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-center mb-4">
+          <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg border border-yellow-400">
+            <h2 className="text-2xl font-bold text-center mb-4 text-black">
               Change Password
             </h2>
             {message && (
@@ -169,7 +171,7 @@ const ManageProfile = () => {
             <form onSubmit={handlePasswordSubmit}>
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">Old Password</span>
+                  <span className="label-text text-black">Old Password</span>
                 </label>
                 <input
                   type="password"
@@ -183,7 +185,7 @@ const ManageProfile = () => {
 
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">New Password</span>
+                  <span className="label-text text-black">New Password</span>
                 </label>
                 <input
                   type="password"
@@ -197,7 +199,7 @@ const ManageProfile = () => {
 
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text">Confirm New Password</span>
+                  <span className="label-text text-black">Confirm New Password</span>
                 </label>
                 <input
                   type="password"
@@ -211,7 +213,7 @@ const ManageProfile = () => {
 
               <button
                 type="submit"
-                className="btn btn-primary w-full mt-4"
+                className="btn bg-yellow-500 text-black w-full mt-4 hover:bg-yellow-600"
                 disabled={isLoading}
               >
                 {isLoading ? "Changing..." : "Change Password"}

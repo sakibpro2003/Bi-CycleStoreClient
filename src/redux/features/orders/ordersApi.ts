@@ -215,7 +215,7 @@ const ordersApi = baseApi.injectEndpoints({
         return {
           url: `/order/${orderId}`,
           method: "PUT",
-          body: { status }, // Ensure body is an object
+          body: status , 
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
             "Content-Type": "application/json",

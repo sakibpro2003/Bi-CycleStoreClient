@@ -15,12 +15,7 @@ const BikeDetails = () => {
   const { name, brand, description, price, quantity, type, image } =
     data?.data || {};
 
-  let inStock;
-  if (quantity > 0) {
-    inStock = true;
-  } else {
-    inStock = false;
-  }
+  const inStock = quantity > 0;
 
   if (isLoading) {
     return (
@@ -32,64 +27,60 @@ const BikeDetails = () => {
 
   if (error) {
     return (
-      <div className="text-center text-red-500 font-semibold text-xl py-10">
+      <div className="text-center text-black font-semibold text-xl py-10">
         Failed to load bike details. Please try again.
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="min-h-screen flex justify-center items-center bg-gray-100">
-        <div className="w-full max-w-screen max-h-screen bg-white shadow-lg rounded-lg overflow-hidden p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Image Section */}
-            <div className="flex justify-center">
-              <img
-                src={image}
-                alt={name}
-                className="w-full max-w-lg rounded-lg shadow-lg"
-              />
-            </div>
+    <div className="min-h-screen flex justify-center items-center bg-white">
+      <div className="w-full max-w-4xl p-8 border-2 border-yellow-300 hover:border-yellow-400 rounded-lg shadow-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Image Section */}
+          <div className="flex justify-center">
+            <img
+              src={image}
+              alt={name}
+              className="w-full max-w-lg rounded-lg shadow-md"
+            />
+          </div>
 
-            {/* Bike Details */}
-            <div>
-              <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
-                {name}
-              </h1>
-              <p className="text-lg text-gray-700 mb-4">{description}</p>
+          {/* Bike Details */}
+          <div>
+            <h1 className="text-4xl font-extrabold text-black mb-4 border-b-4 border-yellow-400 pb-2">
+              {name}
+            </h1>
+            <p className="text-lg text-black mb-4">{description}</p>
 
-              <div className="grid grid-cols-2 gap-4 text-lg">
-                <p className="font-semibold">
-                  <span className="text-gray-600">Price:</span>{" "}
-                  <span className="text-green-600">{price} Taka</span>
-                </p>
-                <p className="font-semibold">
-                  <span className="text-gray-600">Type:</span> {type}
-                </p>
-                <p className="font-semibold">
-                  <span className="text-gray-600">Brand:</span> {brand}
-                </p>
-                <p
-                  className={`font-semibold ${
-                    inStock ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {inStock ? "In Stock" : "Out of Stock"}
-                </p>
-                <p className="font-semibold">
-                  <span className="text-gray-600">Available:</span> {quantity}
-                </p>
-              </div>
-
-              {/* Call-to-action Button */}
-              <button
-                onClick={() => handleCheckout(id)}
-                className="mt-6 w-full btn text-lg"
+            <div className="grid grid-cols-2 gap-4 text-lg text-black">
+              <p className="font-semibold">
+                <span className="text-black">Price:</span>{" "}
+                <span className="text-black">{price} Taka</span>
+              </p>
+              <p className="font-semibold">
+                <span className="text-black">Type:</span> {type}
+              </p>
+              <p className="font-semibold">
+                <span className="text-black">Brand:</span> {brand}
+              </p>
+              <p
+                className={`font-semibold ${inStock ? "text-black" : "text-black"}`}
               >
-                Buy Now
-              </button>
+                {inStock ? "In Stock" : "Out of Stock"}
+              </p>
+              <p className="font-semibold">
+                <span className="text-black">Available:</span> {quantity}
+              </p>
             </div>
+
+            {/* Call-to-action Button */}
+            <button
+              onClick={() => handleCheckout(id)}
+              className="mt-6 w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded-lg shadow-md border-2 border-yellow-300 hover:border-yellow-400"
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

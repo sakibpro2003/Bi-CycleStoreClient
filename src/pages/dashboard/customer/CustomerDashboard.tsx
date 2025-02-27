@@ -7,13 +7,18 @@ const CustomerDashboard = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="w-64 bg-blue-900 text-white p-5 space-y-4">
-        <h2 className="text-2xl font-bold">User Dashboard</h2>
+      {/* Sidebar */}
+      <div className="w-64 bg-black text-white p-5 space-y-4 shadow-lg">
+        <h2 className="text-2xl font-bold border-b-2 border-yellow-400 pb-2">
+          User Dashboard
+        </h2>
         <ul className="space-y-3">
           <li>
             <button
-              className={`w-full text-left p-2 rounded-md ${
-                activeTab === "orders" ? "bg-blue-700" : "hover:bg-blue-800"
+              className={`w-full text-left p-2 rounded-md transition-all duration-300 ${
+                activeTab === "orders"
+                  ? "bg-yellow-500 text-black font-bold"
+                  : "hover:bg-yellow-400 hover:text-black"
               }`}
               onClick={() => setActiveTab("orders")}
             >
@@ -22,8 +27,10 @@ const CustomerDashboard = () => {
           </li>
           <li>
             <button
-              className={`w-full text-left p-2 rounded-md ${
-                activeTab === "profile" ? "bg-blue-700" : "hover:bg-blue-800"
+              className={`w-full text-left p-2 rounded-md transition-all duration-300 ${
+                activeTab === "profile"
+                  ? "bg-yellow-500 text-black font-bold"
+                  : "hover:bg-yellow-400 hover:text-black"
               }`}
               onClick={() => setActiveTab("profile")}
             >
@@ -34,7 +41,7 @@ const CustomerDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+      <div className="flex-1 p-6 bg-white overflow-y-auto shadow-inner border-l-4 border-yellow-400">
         {activeTab === "orders" && <ViewOrders />}
         {activeTab === "profile" && <ManageProfile />}
       </div>

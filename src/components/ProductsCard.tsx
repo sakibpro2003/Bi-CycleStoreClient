@@ -10,7 +10,7 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-lg border border-yellow-400">
+    <div className="card w-96 bg-base-100 shadow-lg border-2 border-yellow-300 ">
       <figure className="px-10 pt-10">
         <img
           src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"

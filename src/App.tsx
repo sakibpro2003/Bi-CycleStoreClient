@@ -24,7 +24,14 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "products", element: <Products /> },
       { path: "products/:id", element: <BikeDetails /> },
-      { path: "products/checkout/:id", element: <Checkout /> },
+      {
+        path: "products/checkout/:id",
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   { path: "/login", element: <Login /> },
