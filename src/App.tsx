@@ -22,9 +22,9 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
-      { path: "products", element: <Products></Products> },
-      { path: "products/:id", element: <BikeDetails></BikeDetails> },
-      { path: "products/checkout/:id", element: <Checkout></Checkout> },
+      { path: "products", element: <Products /> },
+      { path: "products/:id", element: <BikeDetails /> },
+      { path: "products/checkout/:id", element: <Checkout /> },
     ],
   },
   { path: "/login", element: <Login /> },
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "", element: <Dashboard/> },
+      { path: "", element: <Dashboard /> },
       { path: "user", element: <CustomerDashboard /> },
       { path: "admin", element: <AdminDashboard /> },
     ],

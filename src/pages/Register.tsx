@@ -3,6 +3,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import Logo from "../components/Logo";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -37,11 +38,12 @@ const Register = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
+            <Logo></Logo>
+            {/* <img
               alt="Your Company"
               src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
               className="mx-auto h-10 w-auto"
-            />
+            /> */}
             <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
               Create an account
             </h2>

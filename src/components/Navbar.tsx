@@ -1,180 +1,98 @@
-// import { useNavigate } from "react-router-dom";
-// import { logOut } from "../redux/features/auth/authSlice";
-// import { useAppDispatch } from "../redux/features/hooks";
-
-// const Navbar = () => {
-//   const storedAuth = localStorage.getItem("persist:auth");
-
-//         let token = "";
-//         if (!storedAuth) {
-//           console.error("No auth data found!");
-//           return;
-//         }
-
-//         if (storedAuth) {
-//           const parsedAuth = JSON.parse(storedAuth);
-//           token = parsedAuth?.token ? JSON.parse(parsedAuth.token) : "";
-//       console.log(token,"tokennnnnfrom orderapi")
-
-//         }
-//       } catch (error) {
-//         console.error("Error retrieving auth token:", error);
-//       }
-        
-//   const navigate = useNavigate();
-//   const dispatch = useAppDispatch();
-//   const handleLogOut = () => {
-//     dispatch(logOut());
-//     navigate("/login");
-//   };
-//   return (
-//     <div className="navbar bg-base-100">
-//       <div className="navbar-start">
-//         <div className="dropdown">
-//           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-5 w-5"
-//               fill="none"
-//               viewBox="0 0 24 24"
-//               stroke="currentColor"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M4 6h16M4 12h8m-8 6h16"
-//               />
-//             </svg>
-//           </div>
-//           <ul
-//             tabIndex={0}
-//             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-//           >
-//             <li>
-//               <a href="/">Home</a>
-//             </li>
-//             <li>
-//               <a href="/products">products</a>
-//             </li>
-//             <li>
-//               <a href="/about">About</a>
-//             </li>
-
-//             //! make it dynamic
-//             <li>
-//               <a href="/about">About</a>
-//             </li>
-
-//           </ul>
-//         </div>
-//         <a className="btn btn-ghost text-xl">Bi-CycleStore</a>
-//       </div>
-//       <div className="navbar-center hidden lg:flex">
-//         <ul className="menu menu-horizontal px-1">
-//           <li>
-//             <a href="/">Home</a>
-//           </li>
-//           <li>
-//             <a href="/products">products</a>
-//           </li>
-//           <li>
-//               <a href="/about">About</a>
-//             </li>
-
-//         </ul>
-//       </div>
-//       <div className="navbar-end">
-//         <button onClick={handleLogOut} className="btn">
-//           Logout
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
-
-
-import { useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { logOut } from "../redux/features/auth/authSlice";
-import { useAppDispatch } from "../redux/features/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/features/hooks";
 import { jwtDecode } from "jwt-decode";
-// import jwtDecode from "jwt-decode"; // Import JWT decoder
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
-  let token = "";
-  let userRole = "";
+  const { token } = useAppSelector((state) => state.auth);
 
-  try {
-    const storedAuth = localStorage.getItem("persist:auth");
+  const [userRole, setUserRole] = useState<string>("customer");
+  const [loading, setLoading] = useState<boolean>(true); 
 
-    if (storedAuth) {
-      const parsedAuth = JSON.parse(storedAuth);
-      token = parsedAuth?.token ? JSON.parse(parsedAuth.token) : "";
+  useEffect(() => {
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        setUserRole(decodedToken?.role || "customer");
 
-      if (token) {
-        const decodedToken: any = jwtDecode(token); // Decode token
-        userRole = decodedToken?.role || "customer"; // Get role, default to 'customer'
+        console.log("🔑 Token:", token);
+        console.log("👤 User Role:", decodedToken.role || "customer");
+      } catch (error) {
+        console.error("🚨 Error decoding auth token:", error);
       }
-
-      console.log("🔑 Token:", token);
-      console.log("👤 User Role:", userRole);
-    } else {
-      console.error("⚠️ No auth data found in localStorage!");
     }
-  } catch (error) {
-    console.error("🚨 Error retrieving auth token:", error);
-  }
+    setLoading(false);
+  }, [token]); 
 
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/login");
   };
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl">Bi-CycleStore</a>
+        <a href="/" className="btn btn-ghost text-xl">Bi-CycleStore</a>
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a href="/">Home</a>
+            <a href="/" className={isActive("/") ? "bg-yellow-400 hover:bg-yellow-500 font-bold" : ""}>
+              Home
+            </a>
           </li>
           <li>
-            <a href="/products">Products</a>
+            <a href="/products" className={isActive("/products") ? "bg-yellow-400 hover:bg-yellow-500 font-bold" : ""}>
+              Products
+            </a>
           </li>
           <li>
-            <a href="/about">About</a>
+            <a href="/about" className={isActive("/about") ? "bg-yellow-400 hover:bg-yellow-500 font-bold" : ""}>
+              About
+            </a>
           </li>
-          
+
           {userRole === "admin" && (
             <li>
-              <a href="/dashboard/admin">Admin Dashboard</a>
+              <a href="/dashboard/admin" className={isActive("/dashboard/admin") ? "bg-yellow-400 hover:bg-yellow-500 font-bold" : ""}>
+                Admin Dashboard
+              </a>
             </li>
           )}
           {userRole === "customer" && (
             <li>
-              <a href="/dashboard/user">Customer Dashboard</a>
+              <a href="/dashboard/user" className={isActive("/dashboard/user") ? "bg-yellow-400 hover:bg-yellow-500 font-bold" : ""}>
+                Customer Dashboard
+              </a>
             </li>
           )}
         </ul>
       </div>
 
       <div className="navbar-end">
-        {/* <span className="mr-4 font-semibold">{userRole.toUpperCase()}</span> */}
-        <button onClick={handleLogOut} className="btn">
-          Logout
-        </button>
+        {loading ? (
+          <span className="loading loading-spinner"></span> 
+        ) : token ? (
+          <button onClick={handleLogOut} className="btn bg-yellow-400 hover:bg-yellow-500">
+            Logout
+          </button>
+        ) : (
+          <a href="/login" className="btn bg-yellow-400 hover:bg-yellow-500">
+            Login
+          </a>
+        )}
       </div>
     </div>
   );
 };
 
 export default Navbar;
-

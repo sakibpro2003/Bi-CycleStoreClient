@@ -5,17 +5,13 @@ import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import Logo from "../components/Logo";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      email: "sakib@gmail.com",
-      password: "123",
-    },
-  });
+  const { register, handleSubmit } = useForm({});
 
   const [login] = useLoginMutation();
 
@@ -51,7 +47,6 @@ const Login = () => {
         errorMessage = (err as { data: { message: string } }).data.message;
       }
 
-      // console.log(errorMessage);
       toast.error(errorMessage, { position: "top-right" });
     }
   };
@@ -61,11 +56,7 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="mx-auto h-10 w-auto"
-            />
+           <Logo></Logo>
             <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
@@ -100,14 +91,7 @@ const Login = () => {
                   >
                     Password
                   </label>
-                  <div className="text-sm">
-                    <a
-                      href="#"
-                      className="font-semibold text-indigo-600 hover:text-indigo-500"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
+                  
                 </div>
                 <div className="mt-2">
                   <input

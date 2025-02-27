@@ -6,8 +6,7 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
-      {/* <nav>Navbar</nav> */}
-      <Outlet /> {/* This is where child pages (Home, Bicycles, About) will render */}
+      <Outlet /> 
       <Footer/>
     </div>
   );

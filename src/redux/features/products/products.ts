@@ -1,3 +1,102 @@
+// import { baseApi } from "../../api/baseApi";
+
+// const productsApi = baseApi.injectEndpoints({
+//   endpoints: (builder) => ({
+//     getAllproducts: builder.query({
+//       query: () => ({
+//         url: "/products",
+//         method: "GET",
+//       }),
+//     }),
+//     getSingleProducts: builder.query({
+//       query: (id) => ({
+//         url: `/products/${id}`,
+//         method: "GET",
+//       }),
+//     }),
+//     deleteProduct: builder.mutation({
+//       query: (id) => {
+//         const storedAuth = localStorage.getItem("persist:auth");
+
+//         if (!storedAuth) {
+//           console.error("No auth data found!");
+//           return;
+//         }
+
+//         const parsedAuth = JSON.parse(storedAuth);
+//         const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+//         return {
+//           url: `/products/${id}`,
+//           method: "DELETE",
+//           headers: {
+//             Authorization: token ? `Bearer ${token}` : "",
+//             "Content-Type": "application/json",
+//           },
+//         };
+//       },
+//     }),
+//     createProduct: builder.mutation({
+//       query: (productData) => {
+//         const storedAuth = localStorage.getItem("persist:auth");
+
+//         if (!storedAuth) {
+//           console.error("No auth data found!");
+//           return;
+//         }
+
+//         const parsedAuth = JSON.parse(storedAuth);
+//         const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+//         return {
+//           url: `/products`,
+//           method: "POST",
+//           body:productData,
+//           headers: {
+//             Authorization: token ? `Bearer ${token}` : "",
+//             "Content-Type": "application/json",
+//           },
+//         };
+//       },
+//     }),
+//     updateProduct: builder.mutation({
+//       query: ({updatedProduct,id}) => {
+//         console.log(updatedProduct,id,'prodata')
+//         const storedAuth = localStorage.getItem("persist:auth");
+
+//         if (!storedAuth) {
+//           console.error("No auth data found!");
+//           return;
+//         }
+
+//         const parsedAuth = JSON.parse(storedAuth);
+//         const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
+
+//         return {
+//           url: `/products/${id}`,
+//           method: "PUT",
+//           body:updatedProduct,
+//           headers: {
+//             Authorization: token ? `Bearer ${token}` : "",
+//             "Content-Type": "application/json",
+//           },
+//         };
+//       },
+//     }),
+//   }),
+// });
+
+// export const { 
+//   useGetAllproductsQuery, 
+//   useGetSingleProductsQuery, 
+//   useDeleteProductMutation ,
+//   useCreateProductMutation,
+//   useUpdateProductMutation
+// } = productsApi;
+
+// export default productsApi;
+
+
 import { baseApi } from "../../api/baseApi";
 
 const productsApi = baseApi.injectEndpoints({
@@ -17,14 +116,16 @@ const productsApi = baseApi.injectEndpoints({
     deleteProduct: builder.mutation({
       query: (id) => {
         const storedAuth = localStorage.getItem("persist:auth");
+        let token = "";
 
-        if (!storedAuth) {
-          console.error("No auth data found!");
-          return;
+        if (storedAuth) {
+          try {
+            const parsedAuth = JSON.parse(storedAuth);
+            token = parsedAuth.token ? JSON.parse(parsedAuth.token) : "";
+          } catch (error) {
+            console.error("Error parsing auth data", error);
+          }
         }
-
-        const parsedAuth = JSON.parse(storedAuth);
-        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
 
         return {
           url: `/products/${id}`,
@@ -39,19 +140,21 @@ const productsApi = baseApi.injectEndpoints({
     createProduct: builder.mutation({
       query: (productData) => {
         const storedAuth = localStorage.getItem("persist:auth");
+        let token = "";
 
-        if (!storedAuth) {
-          console.error("No auth data found!");
-          return;
+        if (storedAuth) {
+          try {
+            const parsedAuth = JSON.parse(storedAuth);
+            token = parsedAuth.token ? JSON.parse(parsedAuth.token) : "";
+          } catch (error) {
+            console.error("Error parsing auth data", error);
+          }
         }
-
-        const parsedAuth = JSON.parse(storedAuth);
-        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
 
         return {
           url: `/products`,
           method: "POST",
-          body:productData,
+          body: productData,
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
             "Content-Type": "application/json",
@@ -60,22 +163,24 @@ const productsApi = baseApi.injectEndpoints({
       },
     }),
     updateProduct: builder.mutation({
-      query: ({updatedProduct,id}) => {
-        console.log(updatedProduct,id,'prodata')
+      query: ({ updatedProduct, id }) => {
+        console.log(updatedProduct, id, "prodata");
         const storedAuth = localStorage.getItem("persist:auth");
+        let token = "";
 
-        if (!storedAuth) {
-          console.error("No auth data found!");
-          return;
+        if (storedAuth) {
+          try {
+            const parsedAuth = JSON.parse(storedAuth);
+            token = parsedAuth.token ? JSON.parse(parsedAuth.token) : "";
+          } catch (error) {
+            console.error("Error parsing auth data", error);
+          }
         }
-
-        const parsedAuth = JSON.parse(storedAuth);
-        const token = parsedAuth.token ? JSON.parse(parsedAuth.token) : null;
 
         return {
           url: `/products/${id}`,
           method: "PUT",
-          body:updatedProduct,
+          body: updatedProduct,
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
             "Content-Type": "application/json",
@@ -89,9 +194,9 @@ const productsApi = baseApi.injectEndpoints({
 export const { 
   useGetAllproductsQuery, 
   useGetSingleProductsQuery, 
-  useDeleteProductMutation ,
+  useDeleteProductMutation,
   useCreateProductMutation,
-  useUpdateProductMutation
+  useUpdateProductMutation,
 } = productsApi;
 
 export default productsApi;

@@ -12,9 +12,9 @@ const Banner = () => {
            The Ultimate Ride Awaits! 
         </h1>
         <p className="mt-6 text-lg md:text-xl font-light drop-shadow-sm">
-          Get <span className="font-semibold text-yellow-300">20% OFF</span> on
+          Get <span className="font-semibold text-yellow-400">20% OFF</span> on
           all premium bicycles. Upgrade your ride today and experience
-          <span className="font-semibold text-yellow-300">
+          <span className="font-semibold text-yellow-400">
             {" "}
             unmatched speed, comfort, and durability!
           </span>
