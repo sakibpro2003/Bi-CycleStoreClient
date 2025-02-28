@@ -5,11 +5,11 @@ import ManageOrders from "./ManageOrders";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>(() => {
-    return localStorage.getItem("adminActiveTab") || "users"; // Get from localStorage or default to 'users'
+    return localStorage.getItem("adminActiveTab") || "users";
   });
 
   useEffect(() => {
-    localStorage.setItem("adminActiveTab", activeTab); // Store active tab in localStorage
+    localStorage.setItem("adminActiveTab", activeTab);
   }, [activeTab]);
 
   return (

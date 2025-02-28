@@ -13,7 +13,7 @@ const FeaturedSection = () => {
         {/* Heading Section */}
         <div className="max-w-screen-md text-center mx-auto mb-12">
           <h2 className="text-4xl font-extrabold text-gray-900">
-            <span className="text-yellow-400">Explore</span> Our Exclusive Bicycles
+            <span className="text-yellow-400">Explore</span> Our Exclusive Categories
           </h2>
           <p className="sm:text-lg text-gray-600 mt-4">
             Discover a variety of bicycles designed for all terrains and riders,

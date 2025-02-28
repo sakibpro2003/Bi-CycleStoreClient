@@ -8,6 +8,7 @@ import {
   useUpdateProductMutation,
 } from "../../../redux/features/products/products";
 import { TUpdateProduct } from "./types/productUpdate.types";
+import Loader from "../../../components/Loader";
 
 const ManageProducts: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -100,7 +101,7 @@ const ManageProducts: React.FC = () => {
       }).unwrap();
       toast.success("Product updated successfully");
       refetch();
-      addProductModalRef.current?.close();
+      updateProductModalRef.current?.close()
     } catch (error: any) {
       const errorMessage =
         error?.data?.message || "Failed to update product. Please try again.";
@@ -108,7 +109,7 @@ const ManageProducts: React.FC = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center">Loading products...</p>;
+  if (isLoading) return <Loader></Loader>;
 
   // Pagination logic
   const totalPages = Math.ceil((data?.data?.length || 0) / itemsPerPage);
@@ -155,7 +156,7 @@ const ManageProducts: React.FC = () => {
                   </button>
                   <button
                     onClick={() => openUpdateProductModal(product)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+                    className="bg-blue-300 hover:bg-blue-500 text-white font-bold py-1 px-3 rounded"
                   >
                     Update
                   </button>
@@ -168,7 +169,7 @@ const ManageProducts: React.FC = () => {
       {/* Pagination Controls */}
       <div className="flex justify-center mt-4">
         <button
-          className="btn btn-primary mx-2"
+          className="btn bg-yellow-300 hover:bg-yellow-400 mx-2"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -186,7 +187,7 @@ const ManageProducts: React.FC = () => {
           </button>
         ))}
         <button
-          className="btn  mx-2"
+          className="btn bg-yellow-300 hover:bg-yellow-400 mx-2"
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
@@ -212,6 +213,10 @@ const ManageProducts: React.FC = () => {
       </dialog>
       <dialog ref={updateProductModalRef} className="modal">
         <div className="modal-box">
+          <div className="flex justify-end text-3xl text-red-700">
+          <button onClick={() => updateProductModalRef.current?.close()}>X</button>
+
+          </div>
           <h3 className="font-bold text-lg">
             {selectedProductId ? "Update Product" : "Add New Product"}
           </h3>

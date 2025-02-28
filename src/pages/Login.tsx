@@ -24,8 +24,10 @@ const Login = () => {
 
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.token);
+      // console.log(user?.role)
 
       dispatch(setUser({ user: user, token: res.data.token }));
+      
 
       toast.success("Login successful", {
         position: "top-right",

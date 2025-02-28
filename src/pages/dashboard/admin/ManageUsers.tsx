@@ -1,31 +1,32 @@
 import { useGetAllUserQuery, useChangeUserStatusMutation } from "../../../redux/features/admin/adminApi";
 import { useState } from "react";
-import { toast } from "react-toastify"; // Import a toast library (optional)
+import { toast } from "react-toastify";
 import { TShowUser } from "./types/showUser.type";
+import Loader from "../../../components/Loader";
 
 const UserManagement = () => {
   const { data, error, isLoading, refetch } = useGetAllUserQuery(undefined);
   const [changeUserStatus, { isLoading: isUpdating }] = useChangeUserStatusMutation();
-  const [loadingUserId, setLoadingUserId] = useState<string | null>(null); // Track which user is updating
+  const [loadingUserId, setLoadingUserId] = useState<string | null>(null); 
 
-  if (isLoading) return <p className="text-center text-lg">Loading...</p>;
-  if (isUpdating) return <p className="text-center text-lg">Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
+  if (isUpdating) return <Loader></Loader>;
   if (error) return <p className="text-center text-red-500">Error fetching users</p>;
 
   const handleStatusToggle = async (userId: string, isBlocked: boolean) => {
-    setLoadingUserId(userId); // Set loading state for this user
+    setLoadingUserId(userId); 
 
     try {
       const response = await changeUserStatus({ userId, isBlocked: !isBlocked }).unwrap();
       if(response){
         toast.success(`User ${!isBlocked ? "deactivated" : "activated"} successfully`);
       }
-      refetch(); // Refresh the user list
+      refetch(); 
     } catch (error) {
       console.error("Error updating user status:", error);
       toast.error("Failed to update user status");
     } finally {
-      setLoadingUserId(null); // Reset loading state
+      setLoadingUserId(null); 
     }
   };
 
@@ -63,7 +64,7 @@ const UserManagement = () => {
                   <button
                     onClick={() => handleStatusToggle(user._id, user.isBlocked)}
                     className={`btn btn-sm ${user.isBlocked ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"} text-white font-bold px-3 py-1 rounded transition duration-300 shadow-lg ${loadingUserId === user._id ? "opacity-50 cursor-not-allowed" : ""}`}
-                    disabled={loadingUserId === user._id} // Disable button while updating
+                    disabled={loadingUserId === user._id} 
                   >
                     {loadingUserId === user._id ? "Processing..." : user.isBlocked ? "Activate" : "Deactivate"}
                   </button>

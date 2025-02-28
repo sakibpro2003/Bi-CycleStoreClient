@@ -1,4 +1,5 @@
 export type TUpdateProduct = {
+  image:string,
     _id:string,
   name:string;
   brand:string;
@@ -6,4 +7,5 @@ export type TUpdateProduct = {
   type:string;
   description:string;
   quantity:string;
+  inStock:boolean;
 };

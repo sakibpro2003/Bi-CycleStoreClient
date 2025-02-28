@@ -1,3 +1,4 @@
+import Loader from "../../../components/Loader";
 import { useGetOrdersQuery } from "../../../redux/features/orders/ordersApi";
 import { TOrderCustomer } from "./types/OrderTypesCustomer";
 
@@ -9,9 +10,7 @@ const ViewOrders = () => {
       <div className="p-6">
         {/* <h2 className="text-2xl font-bold mb-4 mx-auto bg-red-800">Your Orders</h2> */}
         <div className="flex justify-center items-center h-screen">
-          <div className="flex flex-col space-y-2">
-            <span className="loading loading-dots loading-lg bg-yellow-400"></span>
-          </div>
+          <Loader/>
         </div>
       </div>
     );
