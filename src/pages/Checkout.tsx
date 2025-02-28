@@ -4,12 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleProductsQuery } from "../redux/features/products/products";
 import { useMakeOrderMutation } from "../redux/features/orders/ordersApi";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data } = useGetSingleProductsQuery(id);
-  const [makeOrder] = useMakeOrderMutation();
+  const [makeOrder,{isLoading}] = useMakeOrderMutation();
 
   // Extract product details
   const name = data?.data?.name;
@@ -27,12 +28,12 @@ const Checkout = () => {
 
   // Separate totalPrice state
   const [totalPrice, setTotalPrice] = useState(0);
-
+  
   // Update totalPrice dynamically
   useEffect(() => {
     setTotalPrice(formData.quantity * productPrice);
   }, [formData.quantity, productPrice]);
-
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -42,7 +43,12 @@ const Checkout = () => {
       [name]: name === "quantity" ? Number(value) : value,
     }));
   };
-
+  
+  if(isLoading){
+    return  (<div className="w-screen h-screen flex justify-center items-center content-center">
+      <Loader></Loader>
+    </div>)
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 

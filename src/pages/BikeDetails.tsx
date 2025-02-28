@@ -35,7 +35,7 @@ const BikeDetails = () => {
 
   return (
     <div>
-      <h1 className="text-3xl text-center mt-10">Bi-Cycle Details</h1>
+      <h1 className="text-3xl font-bold text-center mt-10">Bi-Cycle Details</h1>
       <div className="m-10 flex justify-center items-center bg-white">
       <div className="w-full max-w-4xl p-8 border-2 border-yellow-300 hover:border-yellow-400 rounded-lg shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -50,7 +50,7 @@ const BikeDetails = () => {
 
           {/* Bike Details */}
           <div>
-            <h1 className="text-4xl font-extrabold text-black mb-4 border-b-4 border-yellow-400 pb-2">
+            <h1 className="text-2xl text-black mb-4  border-yellow-400 pb-2">
               {name}
             </h1>
             <p className="text-lg text-black mb-4">{description}</p>
@@ -67,7 +67,7 @@ const BikeDetails = () => {
                 <span className="text-black">Brand:</span> {brand}
               </p>
               <p
-                className={`font-semibold ${inStock ? "text-black" : "text-black"}`}
+                className={`font-semibold ${inStock ? "text-green-500" : "text-red-500"}`}
               >
                 {inStock ? "In Stock" : "Out of Stock"}
               </p>

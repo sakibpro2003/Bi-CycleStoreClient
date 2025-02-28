@@ -3,9 +3,10 @@ import { useState } from "react";
 import ProductsCard from "../../../components/ProductsCard";
 import { useGetAllproductsQuery } from "../../../redux/features/products/products";
 import { TUpdateProduct } from "../admin/types/productUpdate.types";
+import Loader from "../../../components/Loader";
 
 const Products = () => {
-  const { data } = useGetAllproductsQuery(undefined);
+  const { data, isLoading } = useGetAllproductsQuery(undefined);
   const products = data?.data || [];
 
   // Filter states
@@ -49,9 +50,15 @@ const Products = () => {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
+  if(isLoading){
+    return (<div className="h-screen w-screen flex justify-center items-center content-center">
+      <Loader></Loader>
+    </div>)
+  }
+
   return (
     <div className="max-w-11/12 mb-12 mx-auto flex flex-col items-center">
-      <h2 className="text-black mb-10 text-3xl font-bold border-yellow-300 pb-2">
+      <h2 className="text-black text-center mb-4 lg:mb-10 text-2xl lg:text-3xl font-bold border-yellow-300 pb-2">
         Explore Our Premium Bicycles
       </h2>
 
@@ -114,7 +121,7 @@ const Products = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-10 flex items-center space-x-2">
+      <div className="mt-10 grid grid-cols-4 gap-2 lg:flex items-center space-x-2">
         {/* Previous Button */}
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

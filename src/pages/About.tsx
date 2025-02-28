@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <div className="w-full min-h-screen m-12 flex justify-center items-center bg-white">
+    <div className="w-4/5 mx-auto min-h-screen m-12 flex justify-center items-center bg-white">
       <div className="w-full max-w-7xl bg-white rounded-lg p-10 md:p-16 shadow-lg border-2 border-yellow-300">
         <h1 className="text-5xl font-extrabold text-black text-center mb-8 border-yellow-400 pb-2">
           About <span className="text-yellow-500">Our Bicycle Shop</span>
@@ -14,7 +14,7 @@ const About = () => {
         </p>
 
         {/* Mission & Vision Section */}
-        <div className="grid md:grid-cols-2 gap-8 mt-8">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-8 mt-8">
           <div className="p-6 bg-yellow-100 rounded-lg shadow-md border border-yellow-400">
             <h2 className="text-3xl font-bold text-black mb-3">
               🚀 Our Mission

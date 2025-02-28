@@ -10,10 +10,9 @@ import Logo from "../components/Logo";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const { register, handleSubmit } = useForm({});
 
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -24,10 +23,8 @@ const Login = () => {
 
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.token);
-      // console.log(user?.role)
 
       dispatch(setUser({ user: user, token: res.data.token }));
-      
 
       toast.success("Login successful", {
         position: "top-right",
@@ -92,9 +89,17 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full rounded-md bg-yellow-400 px-3 py-2 text-sm font-semibold text-black shadow-md hover:bg-yellow-500"
+            disabled={isLoading}
+            className="w-full rounded-md bg-yellow-400 px-3 py-2 text-sm font-semibold text-black shadow-md hover:bg-yellow-500 disabled:opacity-50 flex items-center justify-center"
           >
-            Sign in
+            {isLoading ? (
+              <>
+                <span className="animate-spin rounded-full border-2 border-t-transparent border-black h-5 w-5 mr-2"></span>
+                Signing in...
+              </>
+            ) : (
+              "Sign in"
+            )}
           </button>
         </div>
 
