@@ -1,14 +1,72 @@
+// import { useState } from "react";
+// import ViewOrders from "./ViewOrders";
+// import ManageProfile from "./ManageProfile";
+
+// const CustomerDashboard = () => {
+//   const [activeTab, setActiveTab] = useState("orders");
+
+//   return (
+//     <div className="flex h-screen">
+//       {/* Sidebar */}
+//       <div className="w-64 bg-black text-white p-5 space-y-4 shadow-lg">
+//         <h2 className="text-2xl font-bold border-b-2 border-yellow-400 pb-2">
+//           User Dashboard
+//         </h2>
+//         <ul className="space-y-3">
+//           <li>
+//             <button
+//               className={`w-full text-left p-2 rounded-md transition-all duration-300 ${
+//                 activeTab === "orders"
+//                   ? "bg-yellow-500 text-black font-bold"
+//                   : "hover:bg-yellow-400 hover:text-black"
+//               }`}
+//               onClick={() => setActiveTab("orders")}
+//             >
+//               View Orders
+//             </button>
+//           </li>
+//           <li>
+//             <button
+//               className={`w-full text-left p-2 rounded-md transition-all duration-300 ${
+//                 activeTab === "profile"
+//                   ? "bg-yellow-500 text-black font-bold"
+//                   : "hover:bg-yellow-400 hover:text-black"
+//               }`}
+//               onClick={() => setActiveTab("profile")}
+//             >
+//               Manage Profile
+//             </button>
+//           </li>
+//         </ul>
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="flex-1 p-6 bg-white overflow-y-auto shadow-inner border-l-4 border-yellow-400">
+//         {activeTab === "orders" && <ViewOrders />}
+//         {activeTab === "profile" && <ManageProfile />}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CustomerDashboard;
+
 import { useState } from "react";
 import ViewOrders from "./ViewOrders";
 import ManageProfile from "./ManageProfile";
+import { Menu } from "lucide-react";
 
 const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState("orders");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-black text-white p-5 space-y-4 shadow-lg">
+      <div
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-black text-white p-5 space-y-4 shadow-lg transition-transform duration-300 lg:relative lg:translate-x-0 
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+      >
         <h2 className="text-2xl font-bold border-b-2 border-yellow-400 pb-2">
           User Dashboard
         </h2>
@@ -20,7 +78,10 @@ const CustomerDashboard = () => {
                   ? "bg-yellow-500 text-black font-bold"
                   : "hover:bg-yellow-400 hover:text-black"
               }`}
-              onClick={() => setActiveTab("orders")}
+              onClick={() => {
+                setActiveTab("orders");
+                setIsSidebarOpen(false);
+              }}
             >
               View Orders
             </button>
@@ -32,13 +93,24 @@ const CustomerDashboard = () => {
                   ? "bg-yellow-500 text-black font-bold"
                   : "hover:bg-yellow-400 hover:text-black"
               }`}
-              onClick={() => setActiveTab("profile")}
+              onClick={() => {
+                setActiveTab("profile");
+                setIsSidebarOpen(false);
+              }}
             >
               Manage Profile
             </button>
           </li>
         </ul>
       </div>
+
+      {/* Mobile Sidebar Toggle Button */}
+      <button
+        className="absolute top-4 left-4 z-50 lg:hidden btn btn-sm bg-yellow-400 hover:bg-yellow-500"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        <Menu size={24} />
+      </button>
 
       {/* Main Content */}
       <div className="flex-1 p-6 bg-white overflow-y-auto shadow-inner border-l-4 border-yellow-400">

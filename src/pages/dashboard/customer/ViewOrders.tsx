@@ -10,7 +10,7 @@ const ViewOrders = () => {
       <div className="p-6">
         {/* <h2 className="text-2xl font-bold mb-4 mx-auto bg-red-800">Your Orders</h2> */}
         <div className="flex justify-center items-center h-screen">
-          <Loader/>
+          <Loader />
         </div>
       </div>
     );
@@ -28,14 +28,14 @@ const ViewOrders = () => {
 
   return (
     <div className="p-6">
-       <div className="flex justify-center items-center mb-4 text-3xl font-bold">
-          <div className="flex flex-col space-y-2">
-            <h2>Your Orders</h2>
-          </div>
+      <div className="flex justify-center items-center mb-4 text-3xl font-bold">
+        <div className="flex flex-col space-y-2">
+          <h2>Your Orders</h2>
         </div>
+      </div>
       {orders.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
+          <table className="table table-zebra w-4/5 lg:w-full">
             {/* Table Head */}
             <thead>
               <tr className="bg-base-200">

@@ -4,11 +4,12 @@ import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import Logo from "../components/Logo";
+import Loader from "../components/Loader";
 
 const Register = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const [registerUser] = useRegisterMutation();
+  const [registerUser,{isLoading,isError}] = useRegisterMutation();
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -32,6 +33,16 @@ const Register = () => {
     }
   };
 
+  if(isLoading){
+    return (
+      <div className="flex h-screen justify-center items-center content-center">
+        <Loader></Loader>
+      </div>
+    )
+  }
+  if(isError){
+    toast.error(isError)
+  }
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
       <div className="w-full max-w-md p-8 border-2 border-yellow-400 rounded-lg shadow-lg">
