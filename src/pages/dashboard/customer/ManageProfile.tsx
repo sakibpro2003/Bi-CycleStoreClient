@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { useChangePasswordMutation } from "../../../redux/features/auth/authApi";
@@ -5,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useUpdateUserInfoMutation } from "../../../redux/features/orders/ordersApi";
 import { toast } from "react-toastify";
+import Loader from "../../../components/Loader";
 
 const ManageProfile = () => {
   const [changePassword, { isLoading, error }] = useChangePasswordMutation();
@@ -29,7 +31,8 @@ const ManageProfile = () => {
     setMessage("");
   };
 
-  const [updateUserInfo] = useUpdateUserInfoMutation();
+  const [updateUserInfo, { isLoading: updateLoading }] =
+    useUpdateUserInfoMutation();
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +69,9 @@ const ManageProfile = () => {
 
     try {
       const response = await changePassword(passwordData).unwrap();
-      setMessage(response?.message || "Password changed successfully!");
+      if (response) {
+        toast.success("Password changed successfully");
+      }
       setPasswordData({
         oldPassword: "",
         newPassword: "",
@@ -76,6 +81,14 @@ const ManageProfile = () => {
       setMessage(err?.data?.message || "Failed to change password.");
     }
   };
+
+  if (updateLoading) {
+    return (
+      <div className="flex h-screen justify-center items-center content-center">
+        <Loader></Loader>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -147,7 +160,10 @@ const ManageProfile = () => {
                 </select>
               </div>
 
-              <button type="submit" className="btn bg-yellow-500 text-black w-full mt-4 hover:bg-yellow-600">
+              <button
+                type="submit"
+                className="btn bg-yellow-500 text-black w-full mt-4 hover:bg-yellow-600"
+              >
                 Update Profile
               </button>
             </form>
@@ -199,7 +215,9 @@ const ManageProfile = () => {
 
               <div className="form-control mb-3">
                 <label className="label">
-                  <span className="label-text text-black">Confirm New Password</span>
+                  <span className="label-text text-black">
+                    Confirm New Password
+                  </span>
                 </label>
                 <input
                   type="password"

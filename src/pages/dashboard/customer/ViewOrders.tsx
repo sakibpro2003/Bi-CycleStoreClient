@@ -8,7 +8,6 @@ const ViewOrders = () => {
   if (isLoading) {
     return (
       <div className="p-6">
-        {/* <h2 className="text-2xl font-bold mb-4 mx-auto bg-red-800">Your Orders</h2> */}
         <div className="flex justify-center items-center h-screen">
           <Loader />
         </div>
@@ -36,11 +35,8 @@ const ViewOrders = () => {
       {orders.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="table table-zebra w-4/5 lg:w-full">
-            {/* Table Head */}
             <thead>
               <tr className="bg-base-200">
-                <th className="p-3">Product Image</th>
-                <th className="p-3">Product Name</th>
                 <th className="p-3">Quantity</th>
                 <th className="p-3">Address</th>
                 <th className="p-3">Phone</th>
@@ -49,12 +45,9 @@ const ViewOrders = () => {
               </tr>
             </thead>
 
-            {/* Table Body */}
             <tbody>
               {orders.map((order: TOrderCustomer) => (
                 <tr key={order._id} className="hover">
-                  <td className="p-3">{order.image}</td>
-                  <td className="p-3">{order.name}</td>
                   <td className="p-3">{order.quantity}</td>
                   <td className="p-3">{order.address}</td>
                   <td className="p-3">{order.phone}</td>
