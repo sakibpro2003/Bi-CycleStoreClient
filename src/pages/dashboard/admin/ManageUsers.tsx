@@ -9,8 +9,16 @@ const UserManagement = () => {
   const [changeUserStatus, { isLoading: isUpdating }] = useChangeUserStatusMutation();
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null); 
 
-  if (isLoading) return <Loader></Loader>;
-  if (isUpdating) return <Loader></Loader>;
+  if (isLoading) return (
+    <div className="flex justify-center items-center content-center">
+      <Loader></Loader>
+    </div>
+  );
+  if (isUpdating) return (
+    <div className="flex justify-center items-center content-center">
+      <Loader></Loader>
+    </div>
+  );
   if (error) return <p className="text-center text-red-500">Error fetching users</p>;
 
   const handleStatusToggle = async (userId: string, isBlocked: boolean) => {
@@ -32,12 +40,12 @@ const UserManagement = () => {
 
   return (
     <div className="container mx-auto p-6 bg-white text-black shadow-lg rounded-lg">
-      <h1 className="text-3xl font-bold text-center mb-6 border-b-4 border-yellow-500 pb-2">User Management</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 border-b-4  pb-2">User Management</h1>
 
       <div className="overflow-x-auto">
         <table className="table w-full border border-yellow-500 shadow-md">
           <thead>
-            <tr className="bg-yellow-500 text-black">
+            <tr className="bg-gray-300 text-black">
               <th className="p-3">#</th>
               <th className="p-3">Name</th>
               <th className="p-3">Email</th>
@@ -48,7 +56,7 @@ const UserManagement = () => {
           </thead>
           <tbody>
             {data?.data?.map((user:TShowUser, index:number) => (
-              <tr key={user._id} className="border-b hover:bg-yellow-100">
+              <tr key={user._id} className="border-b">
                 <td className="p-3">{index + 1}</td>
                 <td className="p-3">{user.name}</td>
                 <td className="p-3">{user.email}</td>

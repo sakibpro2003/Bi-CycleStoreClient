@@ -21,14 +21,13 @@ const ManageOrders = () => {
 
   if (isLoading)
     return (
-      <div className="flex flex-col space-y-2">
+      <div className="flex justify-center items-center content-center h-screen">
         <Loader></Loader>
       </div>
     );
   if (error)
     return <p className="text-center text-red-500">Error fetching orders</p>;
 
-  //!..................................................
   const handleChangeStatus = async (orderId: string, newStatus: string) => {
     try {
       await changeOrderStatus({
@@ -54,7 +53,7 @@ const ManageOrders = () => {
     try {
       await deleteOrder(selectedOrderId).unwrap();
       toast.success("Order deleted successfully");
-      refetch(); // Refresh the orders list after deletion
+      refetch(); 
     } catch (err) {
       console.log(err);
       toast.error("Failed to delete order");
