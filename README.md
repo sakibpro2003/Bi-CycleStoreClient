@@ -7,7 +7,7 @@ This project is a fully functional **Bi-Cycle Store** website featuring user aut
 🔗 [Live Website](https://bi-cycle-store-client-red.vercel.app/)
 
 ## 📂 Repository Links
-- **Backend:** [GitHub Repo](https://github.com/your-username/bicycle-store-backend)
+- **Backend:** [GitHub Repo](https://github.com/sakibpro2003/Bi-CycleStoreServer)
 
 ## 🛠️ Features
 ### ✅ **Frontend (Client-Side)**
