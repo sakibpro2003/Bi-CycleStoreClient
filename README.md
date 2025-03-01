@@ -4,10 +4,9 @@
 This project is a fully functional **Bi-Cycle Store** website featuring user authentication, product management, order processing, and payment integration. The website is designed to be responsive and user-friendly, adhering to the given Figma design.
 
 ## 🌐 Live Demo
-🔗 [Live Website](https://your-live-url.com)
+🔗 [Live Website](https://bi-cycle-store-client-red.vercel.app/)
 
 ## 📂 Repository Links
-- **Frontend:** [GitHub Repo](https://github.com/your-username/bicycle-store-frontend)
 - **Backend:** [GitHub Repo](https://github.com/your-username/bicycle-store-backend)
 
 ## 🛠️ Features
@@ -46,20 +45,7 @@ This project is a fully functional **Bi-Cycle Store** website featuring user aut
 - Stripe / SSLCommerz Payment Integration
 - Express Validator & Bcrypt
 
-## 🔑 Admin Credentials
-```
-Email: admin@example.com
-Password: admin123
-```
 
-## 🛠️ Installation & Setup
-### **1️⃣ Clone the Repositories**
-```bash
-git clone https://github.com/your-username/bicycle-store-frontend.git
-cd bicycle-store-frontend
-git clone https://github.com/your-username/bicycle-store-backend.git
-cd bicycle-store-backend
-```
 
 ### **2️⃣ Backend Setup**
 ```bash
@@ -91,19 +77,5 @@ npm run dev
 ## 📹 Demo Video
 🎥 [Watch the Functionality Walkthrough](https://your-demo-video-link.com)
 
-## 📌 Submission Details
-- **Live Deployment:** [Deployed Link](https://your-live-url.com)
-- **GitHub Repositories:**
-  - Frontend: [GitHub Link](https://github.com/your-username/bicycle-store-frontend)
-  - Backend: [GitHub Link](https://github.com/your-username/bicycle-store-backend)
-- **Admin Credentials:** (Provided above)
-
----
-### 📢 **Note:**
-This project is developed as part of Assignment 4 for the **Bi-Cycle Store** project. Any plagiarism will lead to a 0-mark penalty.
-
-📌 **Deadline:** January 29, 2025 (60 Marks), January 30, 2025 (50 Marks), After January 31, 2025 (30 Marks)
-
----
-💡 **Developed By:** [Your Name]
+💡 **Developed By:** [Sakib Prodhan]
 
