@@ -4,7 +4,7 @@
 This project is a fully functional **Bi-Cycle Store** website featuring user authentication, product management, order processing, and payment integration. The website is designed to be responsive and user-friendly, adhering to the given Figma design.
 
 ## 🌐 Live Demo
-🔗 [Live Website](https://bi-cycle-store-client-red.vercel.app/)
+🔗 [Live Website](The link will be added leter)
 
 ## 📂 Repository Links
 - **Backend:** [GitHub Repo](https://github.com/sakibpro2003/Bi-CycleStoreServer)
@@ -75,7 +75,7 @@ npm run dev
 ```
 
 ## 📹 Demo Video
-🎥 [Watch the Functionality Walkthrough](https://your-demo-video-link.com)
+🎥 [Watch the Functionality Walkthrough](https://youtu.be/beWEr87v6YA)
 
-💡 **Developed By:** [Sakib Prodhan]
+💡 **Developed By:** Sakib Prodhan
 
