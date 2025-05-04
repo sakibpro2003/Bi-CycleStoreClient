@@ -4,11 +4,17 @@ import hybridBike from "../assets/hybridBike.png";
 import BMXBike from "../assets/BMXBike.png";
 import electric from "../assets/electric.png";
 import cyclingAccessories from "../assets/cyclingAccessories.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FeaturedSection = () => {
+  const navigate = useNavigate();
+  const handleClickCategory = (title: string) => {
+    // console.log(title);
+    navigate(`/products?category=${encodeURIComponent(title)}`)
+  };
+
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="py-16 px-6">
       <div className="mx-auto max-w-screen-xl">
         {/* Heading Section */}
         <div className="max-w-screen-md text-center mx-auto mb-12">
@@ -24,19 +30,49 @@ const FeaturedSection = () => {
         {/* Bike Categories Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { image: mountain, title: "Mountain Bikes", desc: "Conquer rough terrains with our durable and high-performance mountain bikes." },
-            { image: roadBike, title: "Road Bikes", desc: "Speed through city streets with lightweight and aerodynamic road bikes." },
-            { image: hybridBike, title: "Hybrid Bikes", desc: "Perfect for commuting and leisure rides with a balance of comfort and speed." },
-            { image: BMXBike, title: "BMX Bikes", desc: "Perform tricks and stunts with our sturdy and agile BMX bikes." },
-            { image: electric, title: "Electric Bikes", desc: "Effortless riding with battery-powered assistance for longer journeys." },
-            { image: cyclingAccessories, title: "Cycling Accessories", desc: "Enhance your ride with top-quality helmets, gloves, and gear." },
+            {
+              image: mountain,
+              title: "Mountain",
+              desc: "Conquer rough terrains with our durable and high-performance mountain bikes.",
+            },
+            {
+              image: roadBike,
+              title: "Road",
+              desc: "Speed through city streets with lightweight and aerodynamic road bikes.",
+            },
+            {
+              image: hybridBike,
+              title: "Hybrid",
+              desc: "Perfect for commuting and leisure rides with a balance of comfort and speed.",
+            },
+            {
+              image: BMXBike,
+              title: "BMX",
+              desc: "Perform tricks and stunts with our sturdy and agile BMX bikes.",
+            },
+            {
+              image: electric,
+              title: "Electric",
+              desc: "Effortless riding with battery-powered assistance for longer journeys.",
+            },
+            {
+              image: cyclingAccessories,
+              title: "Cycling Accessories",
+              desc: "Enhance your ride with top-quality helmets, gloves, and gear.",
+            },
           ].map((item, index) => (
-            <div key={index} className="border-2 border-yellow-400 p-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="mb-4 w-full h-52 object-cover rounded-lg"
-              />
+            <div
+              onClick={() => handleClickCategory(item.title)}
+              key={index}
+              className="group cursor-pointer border-2 border-yellow-400 p-5 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-3xl hover:border-4"
+            >
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="mb-4 w-full h-52 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
               <p className="text-gray-600">{item.desc}</p>
             </div>

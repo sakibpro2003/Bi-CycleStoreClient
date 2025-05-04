@@ -6,7 +6,7 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black/40"></div>
       <div className="relative z-10 max-w-4xl text-center px-6">
         <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight md:text-6xl drop-shadow-md">
-          The Ultimate Ride Awaits!
+          The <span className="text-yellow-400">Ultimate</span> Ride Awaits!
         </h1>
         <p className="mt-6 text-lg md:text-xl font-light drop-shadow-sm">
           Get <span className="font-semibold text-yellow-400">20% OFF</span> on

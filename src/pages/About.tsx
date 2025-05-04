@@ -1,7 +1,7 @@
 const About = () => {
   return (
-    <div className="w-4/5 mx-auto min-h-screen m-12 flex justify-center items-center bg-white">
-      <div className="w-full max-w-7xl bg-white rounded-lg p-10 md:p-16 shadow-lg border-2 border-yellow-300">
+    <div className="w-11/12  mx-auto min-h-screen m-12 flex justify-center items-center">
+      <div className=" rounded-lg ">
         <h1 className="text-5xl font-extrabold text-black text-center mb-8 border-yellow-400 pb-2">
           About <span className="text-yellow-500">Our Bicycle Shop</span>
         </h1>
