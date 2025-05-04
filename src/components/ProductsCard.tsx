@@ -3,9 +3,10 @@ import { TProductCard } from "./productCard.type";
 
 const ProductsCard = ({ product }: { product: TProductCard }) => {
   const navigate = useNavigate();
-  const { name, brand, price, image, type, description, _id } = product;
+  const { name, brand, price, image, type, description, _id, discount } =
+    product;
 
-  console.log(brand)
+  console.log(brand);
   const handleViewDetail = (id: string) => {
     navigate(`/products/${id}`);
   };
@@ -16,7 +17,18 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
         <img src={image} alt={name} className="rounded-xl h-40 object-cover" />
       </figure>
       <div className="card-body items-center text-center text-black p-4">
-        <h2 className="card-title font-bold text-lg truncate w-full">{name}</h2>
+        <div className="flex justify-between w-full">
+          <h2 className="card-title font-bold text-lg truncate w-full">
+            {name}
+          </h2>
+          {discount > 0 ? (
+            <span className= "w-2/5 font-bold bg-red-500 text-white rounded-md px-4">
+              {discount} % 
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
         <p className="text-gray-700 text-sm line-clamp-2">{description}</p>
         <div className="flex gap-3 text-xs">
           <p className="font-semibold">
@@ -30,7 +42,7 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
         <div className="card-actions">
           <button
             onClick={() => handleViewDetail(_id)}
-            className="btn bg-yellow-500 text-black hover:bg-yellow-500 border text-sm px-4 py-1"
+            className="btn bg-yellow-500 text-white hover:bg-yellow-500 border text-sm px-4 py-1"
           >
             View Details
           </button>

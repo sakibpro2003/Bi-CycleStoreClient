@@ -1,5 +1,6 @@
 export type TProductCard = {
   image:string,
+  discount: number;
   name: string;
   brand: string;
   price: string;
