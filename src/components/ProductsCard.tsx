@@ -11,7 +11,7 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
   };
 
   return (
-    <div className="relative w-80 bg-white border border-yellow-300 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+    <div className="relative w-70 bg-white border border-yellow-300 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
       {/* Discount Badge */}
       {discount > 0 && (
         <span className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md z-10">
@@ -23,7 +23,7 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
         <img src={image} alt={name} className="object-cover h-full w-full" />
       </figure>
 
-      <div className="p-4 space-y-2 text-black">
+      <div className="p-2 space-y-2 text-black">
         <h2 className="font-bold text-lg truncate">{name}</h2>
 
         <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
@@ -41,9 +41,9 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
           <p className="text-yellow-600 text-lg font-bold">{price}৳</p>
           <button
             onClick={() => handleViewDetail(_id)}
-            className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-medium px-4 py-1 rounded-lg transition"
+            className="bg-yellow-400 border-none hover:bg-yellow-500 text-white text-sm font-medium px-4 py-1 rounded-lg transition"
           >
-            View Details
+            Details
           </button>
         </div>
       </div>

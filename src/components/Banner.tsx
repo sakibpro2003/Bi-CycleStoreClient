@@ -1,24 +1,73 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Banner = () => {
+const slides = [
+  {
+    id: 1,
+    title: "Feel the Freedom on Two Wheels",
+    description: "Discover the joy of cycling with our top-quality bicycles for all terrains.",
+    image: "https://i.ibb.co.com/pSvf4Ys/cyclist-riding-bmx-bike-107420-65715.jpg",
+  },
+  {
+    id: 2,
+    title: "Eco-Friendly Transportation",
+    description: "Make a positive impact on the environment—choose cycling every day.",
+    image: "https://i.ibb.co.com/cXRrQg9C/cyclist-riding-bicycle-nature.jpg",
+  },
+  {
+    id: 3,
+    title: "Built for Adventure",
+    description: "Explore mountains, trails, and more with our durable and stylish bikes.",
+    image: "https://i.ibb.co.com/B2yN3MQ8/cyclist-sunny-day-bike-adventure-travel-photo.jpg",
+  },
+];
+
+const Carousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  // Auto-slide every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleViewAll = () => {
+    navigate("/products"); // or "/bicycles" or wherever you want the button to route
+  };
+
   return (
-    <div className="relative w-11/12 mx-auto bg-white h-[80vh] flex items-center justify-center bg-gradient-to-r from-black/50 to-gray-900/50 text-white">
-      <div className="absolute inset-0 bg-[url('https://i.ibb.co.com/0jkjTyBh/pexels-pixabay-248547.jpg')] bg-cover bg-center blur-sm opacity-40"></div>
-      <div className="absolute inset-0 bg-black/40"></div>
-      <div className="relative z-10 max-w-4xl text-center px-6">
-        <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight md:text-6xl drop-shadow-md">
-          The <span className="text-yellow-400">Ultimate</span> Ride Awaits!
-        </h1>
-        <p className="mt-6 text-lg md:text-xl font-light drop-shadow-sm">
-          Get <span className="font-semibold text-yellow-400">20% OFF</span> on
-          all premium bicycles. Upgrade your ride today and experience
-          <span className="font-semibold text-yellow-400">
-            {" "}
-            unmatched speed, comfort, and durability!
-          </span>
-        </p>
-      </div>
+    <div className="w-11/12 md:mx-auto h-[60vh] relative overflow-hidden rounded-lg shadow-lg">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white px-4 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold">{slide.title}</h2>
+            <p className="mt-3 text-lg md:text-xl">{slide.description}</p>
+            <button
+              onClick={handleViewAll}
+              className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg shadow-md border-2 border-yellow-300 hover:border-yellow-400 transition duration-300"
+            >
+              Explore
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Banner;
+export default Carousel;

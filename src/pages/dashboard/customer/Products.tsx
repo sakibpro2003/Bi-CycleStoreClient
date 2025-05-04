@@ -44,7 +44,7 @@ const Products = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 9;
+  const productsPerPage = 8;
 
   //  let filteredProducts;
 
@@ -104,7 +104,7 @@ const Products = () => {
 
       {/* Products Grid */}
       <div className="flex w-11/12 gap-4 mx-auto">
-        <div className="  lg:w-1/3 flex gap-2 bg-red-400 flex-col justify-start">
+        <div className="  lg:w-1/5 flex gap-2 flex-col justify-start">
           <p className="text-xl">Search products with name:</p>
           <div className="w-full">
             <input
@@ -169,7 +169,7 @@ const Products = () => {
           </select>
         </div>
         {currentProducts.length > 0 ? (
-          <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 w-full">
+          <div className="grid gap-8 grid-cols-1 lg:grid-cols-4 w-full">
             {currentProducts.map((product: TUpdateProduct) => (
               <ProductsCard key={product._id} product={product} />
             ))}
