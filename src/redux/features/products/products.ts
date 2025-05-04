@@ -66,7 +66,6 @@ const productsApi = baseApi.injectEndpoints({
     }),
     updateProduct: builder.mutation({
       query: ({ updatedProduct, id }) => {
-        console.log(updatedProduct, id, "prodata");
         const storedAuth = localStorage.getItem("persist:auth");
         let token = "";
 

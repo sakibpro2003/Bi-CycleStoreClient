@@ -3,6 +3,7 @@ export type TUpdateProduct = {
     _id:string,
   name:string;
   brand:string;
+  discount:number;
   price:string;
   type:string;
   description:string;

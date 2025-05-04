@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 const FeaturedSection = () => {
   const navigate = useNavigate();
   const handleClickCategory = (title: string) => {
-    // console.log(title);
     navigate(`/products?category=${encodeURIComponent(title)}`)
   };
 

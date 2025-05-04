@@ -8,7 +8,6 @@ const BikeDetails = () => {
   const { data, isLoading, error } = useGetSingleProductsQuery(id);
 
   const handleCheckout = (id: any) => {
-    console.log(id);
     navigate(`/products/checkout/${id}`);
   };
 

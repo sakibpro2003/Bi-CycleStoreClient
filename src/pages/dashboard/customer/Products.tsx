@@ -9,6 +9,7 @@ const Products = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const categoryFromURL = queryParams.get("category");
+  console.log(categoryFromURL, "catefromurl");
   const { data, isLoading } = useGetAllproductsQuery(undefined);
   const products = data?.data || [];
 
@@ -20,21 +21,38 @@ const Products = () => {
   const [category, setCategory] = useState<string>("");
   const [availability, setAvailability] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
+  let filteredProducts;
   useEffect(() => {
     if (categoryFromURL) {
       setCategory(categoryFromURL);
     }
-  }, [categoryFromURL]);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     filteredProducts = products.filter(
+      (product: TUpdateProduct) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        Number(product.price) <= priceRange &&
+        product.discount > 0 ||
+        (brand ? product.brand === brand : true) &&
+        (category ? product.type === category : true) &&
+        (availability
+          ? availability === "In Stock"
+            ? product.inStock
+            : !product.inStock
+          : true)
+    );
+  }, [availability, brand, category, categoryFromURL, priceRange, products, searchQuery]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
 
-  // Filter products
-  let filteredProducts = products.filter(
+  //  let filteredProducts;
+
+   filteredProducts = products.filter(
     (product: TUpdateProduct) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
       Number(product.price) <= priceRange &&
+      product.discount > 0 ||
       (brand ? product.brand === brand : true) &&
       (category ? product.type === category : true) &&
       (availability
@@ -87,7 +105,7 @@ const Products = () => {
       {/* Products Grid */}
       <div className="flex w-11/12 gap-4 mx-auto">
         <div className="  lg:w-1/3 flex gap-2 bg-red-400 flex-col justify-start">
-        <p className="text-xl">Search products with name:</p>
+          <p className="text-xl">Search products with name:</p>
           <div className="w-full">
             <input
               type="text"
@@ -173,44 +191,43 @@ const Products = () => {
         )}
 
         {/* Pagination */}
-        
       </div>
       <div className="mt-10 grid grid-cols-4 gap-2 lg:flex items-center space-x-2">
-          {/* Previous Button */}
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold hover:bg-yellow-400 disabled:opacity-50"
-          >
-            Prev
-          </button>
+        {/* Previous Button */}
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold hover:bg-yellow-400 disabled:opacity-50"
+        >
+          Prev
+        </button>
 
-          {/* Page Numbers */}
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              onClick={() => setCurrentPage(i + 1)}
-              className={`px-3 py-1 rounded-md ${
-                currentPage === i + 1
-                  ? "bg-yellow-400 text-white"
-                  : "bg-gray-200 text-black"
-              } hover:bg-yellow-400`}
-            >
-              {i + 1}
-            </button>
-          ))}
-
-          {/* Next Button */}
+        {/* Page Numbers */}
+        {Array.from({ length: totalPages }, (_, i) => (
           <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold hover:bg-yellow-400 disabled:opacity-50"
+            key={i + 1}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`px-3 py-1 rounded-md ${
+              currentPage === i + 1
+                ? "bg-yellow-400 text-white"
+                : "bg-gray-200 text-black"
+            } hover:bg-yellow-400`}
           >
-            Next
+            {i + 1}
           </button>
-        </div>
+        ))}
+
+        {/* Next Button */}
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold hover:bg-yellow-400 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

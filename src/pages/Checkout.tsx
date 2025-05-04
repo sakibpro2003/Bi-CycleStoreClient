@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,10 +12,13 @@ const Checkout = () => {
   const { id } = useParams();
   const { data } = useGetSingleProductsQuery(id);
   const [makeOrder,{isLoading}] = useMakeOrderMutation();
-
+  const discount = data?.data?.discount;
+// console.log(object)
   // Extract product details
   const name = data?.data?.name;
-  const productPrice = data?.data?.price || 0;
+ 
+  console.log(data,'proooooduct data')
+  let productPrice = data?.data?.price || 0;
 
   // Initialize form data state
   const [formData, setFormData] = useState({
@@ -25,14 +29,23 @@ const Checkout = () => {
     address: "",
     phone: "",
   });
+  
 
   // Separate totalPrice state
   const [totalPrice, setTotalPrice] = useState(0);
   
   // Update totalPrice dynamically
   useEffect(() => {
-    setTotalPrice(formData.quantity * productPrice);
-  }, [formData.quantity, productPrice]);
+    if (!data?.data) return;
+  
+    const price = data.data.price || 0;
+    const discount = data.data.discount || 0;
+  
+    const finalUnitPrice = discount > 0 ? price - (price * discount) / 100 : price;
+    const newTotalPrice = formData.quantity * finalUnitPrice;
+  
+    setTotalPrice(newTotalPrice);
+  }, [data, formData.quantity]);
   
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
