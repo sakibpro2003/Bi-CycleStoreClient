@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -99,6 +98,14 @@ const Navbar = () => {
                 className={isActive("/blogs") ? "bg-yellow-400 font-bold" : ""}
               >
                 Blogs
+              </a>
+            </li>
+            <li>
+              <a
+                href="/faq"
+                className={isActive("/faq") ? "bg-yellow-400 font-bold" : ""}
+              >
+                Faq
               </a>
             </li>
 

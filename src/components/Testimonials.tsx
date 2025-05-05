@@ -69,14 +69,14 @@ const TestimonialCard = ({
 
 export default function Testimonials() {
   return (
-    <div className="my-10 max-w-6xl mx-auto px-6">
+    <div className="my-10 w-11/12  mx-auto px-6">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-black">What Our <span className="text-yellow-400">Riders</span> Say</h2>
         <p className="text-sm mt-4 text-black">
           See what our customers have to say about their biking experience.
         </p>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard key={index} {...testimonial} />
         ))}
