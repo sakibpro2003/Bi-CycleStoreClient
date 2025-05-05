@@ -37,11 +37,11 @@ const Carousel = () => {
   }, []);
 
   const handleViewAll = () => {
-    navigate("/products"); // or "/bicycles" or wherever you want the button to route
+    navigate("/products"); 
   };
 
   return (
-    <div className="w-11/12 md:mx-auto h-[60vh] relative overflow-hidden rounded-lg shadow-lg">
+    <div className="w-11/12 mx-auto h-[60vh] relative overflow-hidden rounded-lg shadow-lg">
       {slides.map((slide, index) => (
         <div
           key={slide.id}

@@ -42,7 +42,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="sticky h-8 top-0 z-50 navbar bg-yellow-300 rounded-md w-11/12 mx-auto mb-4">
+    <div className="sticky h-8 top-0 z-40 navbar rounded-md w-11/12 mx-auto mb-4">
       {/* Navbar Start */}
       <div className="navbar-start">
         {/* Mobile Dropdown */}
@@ -91,6 +91,14 @@ const Navbar = () => {
                 className={isActive("/about") ? "bg-yellow-400 font-bold" : ""}
               >
                 About
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blogs"
+                className={isActive("/blogs") ? "bg-yellow-400 font-bold" : ""}
+              >
+                Blogs
               </a>
             </li>
 
@@ -150,6 +158,22 @@ const Navbar = () => {
               className={isActive("/about") ? "bg-yellow-400 font-bold" : ""}
             >
               About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/blogs"
+              className={isActive("/blogs") ? "bg-yellow-400 font-bold" : ""}
+            >
+              Blogs
+            </a>
+          </li>
+          <li>
+            <a
+              href="/faq"
+              className={isActive("/faq") ? "bg-yellow-400 font-bold" : ""}
+            >
+              FAQ
             </a>
           </li>
 

@@ -93,7 +93,7 @@ const Products = () => {
   }
 
   return (
-    <div className=" mb-12 mx-auto  flex flex-col items-center">
+    <div className=" mb-12 mx-auto flex flex-col items-center">
       <h2 className="text-black  text-center mb-4 lg:m-10 text-2xl lg:text-3xl font-bold border-yellow-300 pb-2">
         Explore Our <span className="text-yellow-400">Premium</span> Bicycles
       </h2>
@@ -103,7 +103,7 @@ const Products = () => {
       {/* Filters */}
 
       {/* Products Grid */}
-      <div className="flex w-11/12 gap-4 mx-auto">
+      <div className="flex w-11/12 lg:flex-row flex-col  gap-4 mx-auto">
         <div className="  lg:w-1/5 flex gap-2 flex-col justify-start">
           <p className="text-xl">Search products with name:</p>
           <div className="w-full">

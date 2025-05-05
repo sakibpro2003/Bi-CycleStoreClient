@@ -20,6 +20,13 @@ const testimonials = [
     review:
       "Great value for the price! My hybrid bike is perfect for city commuting and weekend rides.",
   },
+  {
+    name: "James Smith",
+    image: "https://readymadeui.com/team-4.webp",
+    rating: 5,
+    review:
+      "Great value for the price! My hybrid bike is perfect for city commuting and weekend rides.",
+  },
 ];
 
 const TestimonialCard = ({

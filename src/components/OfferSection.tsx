@@ -7,7 +7,7 @@ const OfferSection = () => {
     navigate(`/products?category='discount'`)
   }
   return (
-    <div className="w-11/12 md:mx-auto bg-yellow-50 mb-12 border-2 border-yellow-400 py-12 px-4 md:px-20 text-center shadow-md rounded-2xl mt-10">
+    <div className="w-11/12 mx-auto bg-yellow-50 mb-12 border-2 border-yellow-50 py-12 px-4 md:px-20 text-center shadow-md rounded-2xl mt-10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         {/* Left Side - Text */}
         <div className="text-black md:text-left">

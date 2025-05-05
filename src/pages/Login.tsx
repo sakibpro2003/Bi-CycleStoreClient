@@ -7,11 +7,25 @@ import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm({});
+  const { register, handleSubmit,setValue } = useForm({});
   const [login, { isLoading }] = useLoginMutation();
+
+  const testCredentialSet = ()=>{
+    setValue('password','1111');
+    setValue('email','user1@gmail.com');
+  }
+  const testCredentialSet2 = ()=>{
+    setValue('password','1111');
+    setValue('email','user2@gmail.com');
+  }
+  const testCredentialSetAdmin = ()=>{
+    setValue('password','1111');
+    setValue('email','admin@gmail.com');
+  }
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -57,6 +71,9 @@ const Login = () => {
           <div className="text-center md:mx-auto">
             {/* <Logo /> */}
             <h2 className="mt-4 text-3xl font-bold text-yellow-400">Sign in to your account</h2>
+            <button  onClick={testCredentialSet} className="bg-red-500 btn text-white">User1 Credential</button>
+            <button  onClick={testCredentialSet2} className="bg-red-500 btn text-white">User2 Credential</button>
+            <button  onClick={testCredentialSetAdmin} className="bg-red-500 btn text-white">Admin Credential</button>
           </div>
 
           <div className="mt-8 space-y-6">

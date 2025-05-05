@@ -13,6 +13,10 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import CustomerDashboard from "./pages/dashboard/customer/CustomerDashboard";
 import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
 import Products from "./pages/dashboard/customer/Products";
+import BlogDetail from "./pages/BlogDetails";
+import Blogs from "./pages/Blog";
+import Faq from "./pages/Faq";
+// import moduleName from './pages/'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +27,10 @@ const router = createBrowserRouter([
       { path: "bicycles", element: <Bicycles /> },
       { path: "about", element: <About /> },
       { path: "products", element: <Products /> },
+      { path: "blog/:id", element: <BlogDetail /> },
+      { path: "blogs", element: <Blogs /> },
+      { path: "faq", element: <Faq></Faq>},
+
       { path: "products/:id", element: <BikeDetails /> },
       {
         path: "products/checkout/:id",
