@@ -1,3 +1,4 @@
+
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useGetAllOrdersQuery } from "../../../redux/features/admin/adminApi";
@@ -19,12 +20,25 @@ const ManageOrders = () => {
   const statusTypes = ["Pending", "Paid", "Shipped", "Completed", "Cancelled"];
   const modalRef = useRef<HTMLDialogElement>(null);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const orders = data?.data || [];
+  const totalPages = Math.ceil(orders.length / itemsPerPage);
+
+  const paginatedOrders = orders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center content-center h-screen">
-        <Loader></Loader>
+        <Loader />
       </div>
     );
+
   if (error)
     return <p className="text-center text-red-500">Error fetching orders</p>;
 
@@ -53,7 +67,7 @@ const ManageOrders = () => {
     try {
       await deleteOrder(selectedOrderId).unwrap();
       toast.success("Order deleted successfully");
-      refetch(); 
+      refetch();
     } catch (err) {
       console.log(err);
       toast.error("Failed to delete order");
@@ -81,9 +95,9 @@ const ManageOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((order: TOrder, index: string) => (
+            {paginatedOrders.map((order: TOrder, index: number) => (
               <tr key={order._id} className="border-b hover:bg-gray-100">
-                <td className="p-3">{index + 1}</td>
+                <td className="p-3">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                 <td className="p-3">{order.address}</td>
                 <td className="p-3">{order.phone}</td>
                 <td className="p-3">${order.totalPrice}</td>
@@ -116,6 +130,35 @@ const ManageOrders = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6 gap-2">
+        <button
+          className="btn bg-yellow-400 text-white border-none btn-sm "
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`btn bg-yellow-400 text-white border-none btn-sm ${currentPage === i + 1 ? "btn-active bg-yellow-600" : ""}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          className="btn text-white border-none bg-yellow-400 btn-sm"
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
 
       {/* Delete Confirmation Modal */}

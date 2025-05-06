@@ -109,7 +109,7 @@ const ManageProducts: React.FC = () => {
     }
   };
 
-  if (isLoading) return <Loader></Loader>;
+  if (isLoading) return <div className="flex h-full w-full justify-center items-center content-center "><Loader ></Loader></div>;
 
   // Pagination logic
   const totalPages = Math.ceil((data?.data?.length || 0) / itemsPerPage);

@@ -41,7 +41,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="sticky h-8 top-0 z-40 navbar rounded-md w-11/12 mx-auto mb-4">
+    <div className="sticky h-8 top-0 z-40 bg-yellow-50 navbar rounded-md w-11/12 mx-auto mb-4">
       {/* Navbar Start */}
       <div className="navbar-start">
         {/* Mobile Dropdown */}
