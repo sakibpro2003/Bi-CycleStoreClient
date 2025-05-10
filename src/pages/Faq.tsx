@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type FAQItem = {
   question: string;
@@ -29,6 +29,11 @@ const faqData: FAQItem[] = [
 ];
 
 const Faq: React.FC = () => {
+
+  useEffect(() => {
+      document.title = "FAQ | Bi-Cycle Store";
+    }, []);
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {

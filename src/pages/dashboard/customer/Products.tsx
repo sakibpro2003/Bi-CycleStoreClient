@@ -4,8 +4,12 @@ import { useGetAllproductsQuery } from "../../../redux/features/products/product
 import { TUpdateProduct } from "../admin/types/productUpdate.types";
 import Loader from "../../../components/Loader";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Products = () => {
+  useEffect(() => {
+		document.title = "Products | Bi-Cycle Store";
+	}, []);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const categoryFromURL = queryParams.get("category");
@@ -93,6 +97,8 @@ const Products = () => {
   }
 
   return (
+    <>
+    <Helmet title="Products"></Helmet>
     <div className=" mb-12 mx-auto flex flex-col items-center">
       <h2 className="text-black  text-center mb-4 lg:m-10 text-2xl lg:text-3xl font-bold border-yellow-300 pb-2">
         Explore Our <span className="text-yellow-400">Premium</span> Bicycles
@@ -229,6 +235,8 @@ const Products = () => {
         </button>
       </div>
     </div>
+    </>
+    
   );
 };
 

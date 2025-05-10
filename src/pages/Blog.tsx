@@ -11,6 +11,11 @@ type Blog = {
 };
 
 const Blogs = () => {
+
+  useEffect(() => {
+      document.title = "Blogs | Bi-Cycle Store";
+    }, []);
+
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
 

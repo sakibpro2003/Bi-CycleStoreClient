@@ -6,9 +6,14 @@ import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { useEffect } from "react";
 
 
 const Login = () => {
+
+  useEffect(() => {
+		document.title = "Login | Bi-Cycle Store";
+	}, []);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit,setValue } = useForm({});

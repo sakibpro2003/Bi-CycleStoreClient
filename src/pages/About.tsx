@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+
 const About = () => {
+  useEffect(() => {
+      document.title = "About | Bi-Cycle Store";
+    }, []);
   return (
     <div className="w-11/12  mx-auto min-h-screen m-12 flex justify-center items-center">
       <div className=" rounded-lg ">
