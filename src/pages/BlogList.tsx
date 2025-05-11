@@ -21,13 +21,13 @@ const BlogList = () => {
   }, []);
 
   return (
-    <section className="bg-white py-12 px-4 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white mx-auto py-6 px-4 md:px-12">
+      <div className="mx-auto">
         <h2 className="text-4xl font-bold w-full text-gray-800 text-center mb-10 border-yellow-300 inline-block pb-2">
           Latest <span className="text-yellow-400">Blog</span> Posts
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 w-11/12  mx-auto md:grid-cols-2 lg:grid-cols-4 gap-4">
           {blogs.map((post) => (
             <div key={post.id} className="bg-white rounded-lg shadow-md border hover:shadow-xl transition">
               <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-t-lg" />

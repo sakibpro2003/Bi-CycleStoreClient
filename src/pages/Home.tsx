@@ -7,6 +7,8 @@ import Testimonials from "../components/Testimonials";
 import BlogList from "./BlogList";
 import "../../src/App.css";
 import { useEffect } from "react";
+import Faq from "./Faq";
+import WhyChooseUs from "../components/WhyChooseUse";
 
 const Home = () => {
   useEffect(() => {
@@ -21,6 +23,8 @@ const Home = () => {
       <OfferSection></OfferSection>
       <BlogList></BlogList>
       <Newsletter></Newsletter>
+      <WhyChooseUs></WhyChooseUs>
+      <Faq></Faq>
       <Testimonials></Testimonials>
     </div>
   );

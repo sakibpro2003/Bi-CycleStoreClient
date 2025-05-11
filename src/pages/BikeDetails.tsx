@@ -33,7 +33,7 @@ const BikeDetails = () => {
   }
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-3xl font-bold text-center mt-10">Bi-Cycle <span className="text-yellow-400">Details</span></h1>
       <div className="m-10 flex justify-center items-center bg-white">
       <div className="w-11/12 p-12 border-2 border-yellow-300 hover:border-yellow-400 rounded-lg shadow-lg">

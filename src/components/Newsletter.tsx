@@ -14,7 +14,7 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto py-10 bg-yellow-50 rounded-xl shadow-md border border-yellow-500">
+    <div className="w-11/12 mx-auto py-10 bg-yellow-50 mt-8 rounded-xl shadow-md border border-yellow-500">
       <div className="text-center px-4">
         <h2 className="text-3xl font-bold mb-2 text-black">Subscribe to our Newsletter</h2>
         <p className="text-gray-600 mb-6">Get the latest bike updates, offers, and news directly to your inbox.</p>
