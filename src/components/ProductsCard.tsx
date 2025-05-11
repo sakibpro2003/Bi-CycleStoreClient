@@ -3,8 +3,7 @@ import { TProductCard } from "./productCard.type";
 
 const ProductsCard = ({ product }: { product: TProductCard }) => {
   const navigate = useNavigate();
-  const { name, brand, price, image, type, description, _id, discount } =
-    product;
+  const { name, brand, price, image, type, description, _id, discount } = product;
 
   const handleViewDetail = (id: string) => {
     navigate(`/products/${id}`);
@@ -19,13 +18,16 @@ const ProductsCard = ({ product }: { product: TProductCard }) => {
         </span>
       )}
 
-      <figure className="h-44 w-full bg-gray-50 flex items-center justify-center overflow-hidden">
-        <img src={image} alt={name} className="object-cover h-full w-full" />
+      <figure className="h-44 w-full flex items-center justify-center overflow-hidden p-4">
+        <img
+          src={image}
+          alt={name}
+          className="max-h-full max-w-full rounded-md object-contain"
+        />
       </figure>
 
       <div className="p-2 space-y-2 text-black">
         <h2 className="font-bold text-lg truncate">{name}</h2>
-
         <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
 
         <div className="text-sm flex flex-wrap justify-between">
