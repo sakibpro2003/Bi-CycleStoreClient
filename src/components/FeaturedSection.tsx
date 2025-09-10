@@ -3,13 +3,13 @@ import roadBike from "../assets/roadBike.png";
 import hybridBike from "../assets/hybridBike.png";
 import BMXBike from "../assets/BMXBike.png";
 import electric from "../assets/electric.png";
-import cyclingAccessories from "../assets/cyclingAccessories.png";
+import baby from "../assets/baby.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const FeaturedSection = () => {
   const navigate = useNavigate();
   const handleClickCategory = (title: string) => {
-    navigate(`/products?category=${encodeURIComponent(title)}`)
+    navigate(`/products?category=${encodeURIComponent(title)}`);
   };
 
   return (
@@ -18,7 +18,8 @@ const FeaturedSection = () => {
         {/* Heading Section */}
         <div className="max-w-screen-md text-center mx-auto mb-12">
           <h2 className="text-4xl font-extrabold text-gray-900">
-            <span className="text-yellow-400">Explore</span> Our Exclusive Categories
+            <span className="text-yellow-400">Explore</span> Our Exclusive
+            Categories
           </h2>
           <p className="sm:text-lg text-gray-600 mt-4">
             Discover a variety of bicycles designed for all terrains and riders,
@@ -55,8 +56,8 @@ const FeaturedSection = () => {
               desc: "Effortless riding with battery-powered assistance for longer journeys.",
             },
             {
-              image: cyclingAccessories,
-              title: "Cycling Accessories",
+              image: baby,
+              title: "Baby",
               desc: "Enhance your ride with top-quality helmets, gloves, and gear.",
             },
           ].map((item, index) => (
@@ -72,7 +73,9 @@ const FeaturedSection = () => {
                   className="mb-4 w-full h-52 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
+              <h3 className="mb-2 text-xl font-bold text-gray-900">
+                {item.title}
+              </h3>
               <p className="text-gray-600">{item.desc}</p>
             </div>
           ))}

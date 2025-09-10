@@ -29,10 +29,9 @@ const faqData: FAQItem[] = [
 ];
 
 const Faq: React.FC = () => {
-
   useEffect(() => {
-      document.title = "FAQ | Bi-Cycle Store";
-    }, []);
+    document.title = "FAQ | Bi-Cycle Store";
+  }, []);
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -42,7 +41,21 @@ const Faq: React.FC = () => {
 
   return (
     <div className="w-11/12 mx-auto py-10">
-      <h2 className="text-3xl font-bold text-center mb-8 text-black">Frequently Asked <span className='text-yellow-400'>Questions</span></h2>
+      {/* Banner Image */}
+      <div className="mb-8 flex justify-center">
+        <img 
+          src="https://www.prioritybicycles.com/cdn/shop/articles/Bicyle-Locls-Hero_large.jpg?v=1743450988" 
+          alt="Bicycle FAQ Banner" 
+          className="rounded-2xl shadow-lg w-full  object-cover"
+        />
+      </div>
+
+      {/* Heading */}
+      <h2 className="text-3xl font-bold text-center mb-8 text-black">
+        Frequently Asked <span className="text-yellow-400">Questions</span>
+      </h2>
+
+      {/* FAQ Items */}
       <div className="space-y-4">
         {faqData.map((item, index) => (
           <div key={index} className="border border-yellow-500 rounded-xl shadow-md bg-white">
